@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Metadatos EDA</title>
+<style>
+  :root {
+    --fg: #e9eef3;
+    --muted: #b8c2cc;
+    --border: rgba(255,255,255,.15);
+    --row: rgba(255,255,255,.04);
+    --row2: rgba(255,255,255,.08);
+    --accent: #66d9ef;
+  }
+  html,body { background: transparent; color: var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+  .wrap { padding: 8px 6px 10px; }
+  h3 { margin: 4px 0 12px; letter-spacing:.3px }
+  .kpis { display:flex; gap:12px; margin: 4px 0 16px; flex-wrap:wrap; }
+  .kpi { flex:1 1 160px; background: var(--row2); border:1px solid var(--border); border-radius:12px; padding:10px 12px; }
+  .kpi .label { font-size:12px; color: var(--muted); margin-bottom:4px }
+  .kpi .value { font-size:22px; font-weight:700 }
+
+  table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  th, td { padding:8px 10px; border-bottom:1px solid var(--border); }
+  th { position:sticky; top:0; background: var(--row2); text-align:left; }
+  tbody tr:nth-child(odd) { background: var(--row); }
+  tbody tr:hover { background: rgba(255,255,255,.12); }
+  .muted { color: var(--muted); font-size: 13px; margin: 6px 0 10px; }
+
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:12px }
+  @media (max-width: 900px) { .grid2 { grid-template-columns:1fr; } }
+
+  .small { font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="kpis">
+      <div class="kpi"><div class="label">Rows</div><div class="value">49,123</div></div>
+      <div class="kpi"><div class="label">Columns</div><div class="value">11</div></div>
+    </div>
+
+    <h3>Perfil de columnas</h3>
+    <div class="muted">Ordenado por % de nulos (desc).</div>
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>column</th>
+      <th>dtype</th>
+      <th>n_unique</th>
+      <th>pct_nulls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AIModelsHaveWorkedWith</td>
+      <td>object</td>
+      <td>2282</td>
+      <td>66.90</td>
+    </tr>
+    <tr>
+      <td>ConvertedCompYearly</td>
+      <td>float64</td>
+      <td>6234</td>
+      <td>51.29</td>
+    </tr>
+    <tr>
+      <td>LanguageHaveWorkedWith</td>
+      <td>object</td>
+      <td>15467</td>
+      <td>35.58</td>
+    </tr>
+    <tr>
+      <td>Industry</td>
+      <td>object</td>
+      <td>15</td>
+      <td>31.59</td>
+    </tr>
+    <tr>
+      <td>AISelect</td>
+      <td>object</td>
+      <td>5</td>
+      <td>31.43</td>
+    </tr>
+    <tr>
+      <td>RemoteWork</td>
+      <td>object</td>
+      <td>5</td>
+      <td>31.30</td>
+    </tr>
+    <tr>
+      <td>OrgSize</td>
+      <td>object</td>
+      <td>9</td>
+      <td>30.49</td>
+    </tr>
+    <tr>
+      <td>Country</td>
+      <td>object</td>
+      <td>177</td>
+      <td>27.93</td>
+    </tr>
+    <tr>
+      <td>WorkExp</td>
+      <td>float64</td>
+      <td>72</td>
+      <td>12.78</td>
+    </tr>
+    <tr>
+      <td>DevType</td>
+      <td>object</td>
+      <td>32</td>
+      <td>11.17</td>
+    </tr>
+    <tr>
+      <td>EdLevel</td>
+      <td>object</td>
+      <td>8</td>
+      <td>2.11</td>
+    </tr>
+  </tbody>
+</table>
+
+    <div class="grid2">
+      <div>
+        <h3 style="margin-top:16px">Top 10 · DevType</h3>
+        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>DevType</th>
+      <th>count</th>
+      <th>pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Developer, full-stack</td>
+      <td>12339</td>
+      <td>36.3</td>
+    </tr>
+    <tr>
+      <td>Developer, back-end</td>
+      <td>6446</td>
+      <td>19.0</td>
+    </tr>
+    <tr>
+      <td>Student</td>
+      <td>3003</td>
+      <td>8.8</td>
+    </tr>
+    <tr>
+      <td>Architect, software or solutions</td>
+      <td>2680</td>
+      <td>7.9</td>
+    </tr>
+    <tr>
+      <td>Developer, front-end</td>
+      <td>1972</td>
+      <td>5.8</td>
+    </tr>
+    <tr>
+      <td>Developer, desktop or enterprise applications</td>
+      <td>1918</td>
+      <td>5.6</td>
+    </tr>
+    <tr>
+      <td>Other (please specify):</td>
+      <td>1823</td>
+      <td>5.4</td>
+    </tr>
+    <tr>
+      <td>Developer, mobile</td>
+      <td>1389</td>
+      <td>4.1</td>
+    </tr>
+    <tr>
+      <td>Developer, embedded applications or devices</td>
+      <td>1273</td>
+      <td>3.7</td>
+    </tr>
+    <tr>
+      <td>Academic researcher</td>
+      <td>1129</td>
+      <td>3.3</td>
+    </tr>
+  </tbody>
+</table>
+        <div class="small">Frecuencia sobre respuestas de DevType (múltiples valores separados por “;”).</div>
+      </div>
+      <div>
+        <h3 style="margin-top:16px">Top 10 · Country</h3>
+        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Country</th>
+      <th>count</th>
+      <th>pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>United States of America</td>
+      <td>7226</td>
+      <td>34.3</td>
+    </tr>
+    <tr>
+      <td>Germany</td>
+      <td>3022</td>
+      <td>14.3</td>
+    </tr>
+    <tr>
+      <td>India</td>
+      <td>2542</td>
+      <td>12.1</td>
+    </tr>
+    <tr>
+      <td>United Kingdom of Great Britain and Northern Ireland</td>
+      <td>2038</td>
+      <td>9.7</td>
+    </tr>
+    <tr>
+      <td>France</td>
+      <td>1409</td>
+      <td>6.7</td>
+    </tr>
+    <tr>
+      <td>Canada</td>
+      <td>1303</td>
+      <td>6.2</td>
+    </tr>
+    <tr>
+      <td>Ukraine</td>
+      <td>964</td>
+      <td>4.6</td>
+    </tr>
+    <tr>
+      <td>Poland</td>
+      <td>887</td>
+      <td>4.2</td>
+    </tr>
+    <tr>
+      <td>Netherlands</td>
+      <td>867</td>
+      <td>4.1</td>
+    </tr>
+    <tr>
+      <td>Italy</td>
+      <td>834</td>
+      <td>4.0</td>
+    </tr>
+  </tbody>
+</table>
+        <div class="small">Frecuencia de países más presentes en la muestra.</div>
+      </div>
+    </div>
+  </div>
+</body></html>
