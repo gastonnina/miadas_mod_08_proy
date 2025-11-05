@@ -5,9 +5,12 @@ Sitio web y repositorio para el **Clasificación** usando el dataset **[Stack Ov
 
 ---
 
-**Autor**: Gaston Nina Sossa
-
-**Materia:** Modelado de Datos I
+| | |
+|-|-|
+| **👤 Autor** | Gaston Nina Sossa |
+| **📚 Materia** | Modelado de Datos I |
+| **🌐 Sitio web** | https://gastonnina.github.io/miadas_mod_08_proy/ |
+| **🗃️ Repositorio** | https://github.com/gastonnina/miadas_mod_08_proy |
 
 ---
 - [🗂️ Estructura](#️-estructura)
