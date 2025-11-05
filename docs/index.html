@@ -31,17 +31,95 @@
         <p class="small">Autor: Gaston Nina Sossa</p>
       </section>
 
-      <section data-menu-title="Problema">
-        <h2>1. Definición del problema</h2>
-        <ul>
-          <li><strong>Objetivo:</strong> predecir si un desarrollador <em>usa IA</em> (binario) o su nivel de uso (multiclase).</li>
-          <li><strong>Target:</strong> <code>AI_Usage</code> o <code>AI_Usage_Level</code>.</li>
-          <li><strong>Features:</strong> <code>DevType</code>, <code>YearsCodePro</code>, <code>LanguageWorkedWith</code>, <code>Country</code>, <code>RemoteWork</code>, <code>EdLevel</code>, <code>Salary</code>, etc.</li>
-        </ul>
+      <section data-menu-title="Introducción">
+        <section>
+          <h2>📘 Introducción</h2>
+        </section>
+        <section data-menu-title="Contexto">
+          <h3>Contexto</h3>
+          <p>Este sitio presenta el Sprint 1 de Modelamiento de Datos I (UMSA), usando el dataset <a href="https://www.kaggle.com/datasets/edoardogalli/stack-overflow-annual-developer-survey-2025" target="_blank" rel="noopener">Stack Overflow Annual Developer Survey 2025</a>. Se aborda un problema de clasificación enfocada en la adopción de herramientas de IA por parte de desarrolladores.</p>
+        </section>
+        <section data-menu-title="Objetivo">
+          <h3>Objetivo</h3>
+          <p>Predecir si un encuestado <em>usa IA</em> (Sí/No o Alta/Media/Baja frecuencia) a partir de su perfil técnico y demográfico.</p>
+        </section>
+        <section data-menu-title="Pregunta de investigación">
+          <h3>Tipo de modelo</h3>
+          <p><strong>Clasificación</strong></p>
+          <h3>Pregunta de investigación</h3>
+          <p class="question-callout">¿Podemos predecir la adopción de IA en desarrolladores 2025?</p>
+        </section>
+        <section data-menu-title="Criterio de éxito">
+          <h3>Criterio de éxito</h3>
+          <p>F1-score ≥ 0.80 en conjunto de prueba con validación cruzada estratificada (k=5).</p>
+        </section>
+      </section>
+
+      <section data-menu-title="Definición del problema">
+        <section>
+          <h2>🧩 Definición del problema</h2>
+        </section>
+        <section data-menu-title="Necesidad de negocio">
+          <h3>Necesidad de negocio</h3>
+          <p>Comprender qué factores explican la adopción de IA para orientar formación, herramientas y estrategias de talento en organizaciones tecnológicas.</p>
+        </section>
+        <section data-menu-title="Variable objetivo">
+          <h3>Variable objetivo</h3>
+          <p>AI_Usage (binaria: 1=usa IA, 0=no) o AI_Usage_Level (multiclase).</p>
+        </section>
+        <section data-menu-title="Predictoras">
+          <h3>Predictoras candidatas</h3>
+          <p>DevType, YearsCodePro, LanguageWorkedWith, Country, RemoteWork, Industry, OrgSize, EdLevel, Salary.</p>
+        </section>
+        <section data-menu-title="Restricciones">
+          <h3>Restricciones</h3>
+          <p>Sesgos de encuesta; categorías heterogéneas; datos faltantes.</p>
+        </section>
+        <section data-menu-title="Hipótesis">
+          <h3>Hipótesis</h3>
+          <p>La experiencia y ciertos lenguajes/roles están positivamente asociados a la adopción de IA.</p>
+        </section>
       </section>
 
       <section data-menu-title="EDA (5 bivariados)">
-        <h2>2. EDA – 5 bivariados</h2>
+        <h2>📊 2. EDA (5 bivariados)</h2>
+      </section>
+
+      <section data-menu-title="Determinación de la técnica">
+        <h2>🛠️ Determinación de la técnica</h2>
+      </section>
+
+      <section data-menu-title="Técnicas competidoras">
+        <h2>⚔️ Técnicas competidoras</h2>
+      </section>
+
+      <section data-menu-title="Comparación (criterio preciso)">
+        <h2>📈 Comparación (criterio preciso)</h2>
+      </section>
+
+      <section data-menu-title="Optimización">
+        <h2>⚙️ Optimización</h2>
+      </section>
+
+      <section data-menu-title="Limitaciones y ética">
+        <h2>⚖️ Limitaciones y ética</h2>
+      </section>
+
+      <section data-menu-title="Insights y decisiones">
+        <h2>💡 Insights y decisiones</h2>
+      </section>
+
+      <section data-menu-title="Reproducibilidad">
+        <h2>🔁 Reproducibilidad</h2>
+      </section>
+
+      <section data-menu-title="Referencias">
+        <h2>📚 Referencias</h2>
+      </section>
+
+
+      <section data-menu-title="EDA (5 bivariados)">
+        <h2>📊 2. EDA – 5 bivariados</h2>
         <ol>
           <li>DevType × AI_Usage — barras apiladas (%)</li>
           <li>AI_Usage_Frequency × Salary — boxplots</li>
@@ -53,7 +131,7 @@
       </section>
 
       <section data-menu-title="Técnica">
-        <h2>3. Técnica seleccionada</h2>
+        <h2>🛠️ 3. Técnica seleccionada</h2>
         <p><strong>Regresión Logística</strong> (binaria) por interpretabilidad y baseline sólido.</p>
         <ul>
           <li>Métrica principal: <strong>F1-score</strong> (clase desbalanceada).</li>
@@ -63,7 +141,7 @@
       </section>
 
       <section data-menu-title="Competidoras">
-        <h2>4. Técnicas competidoras</h2>
+        <h2>⚔️ 4. Técnicas competidoras</h2>
         <ul>
           <li><strong>Random Forest</strong>: no linealidades, importancia de variables.</li>
           <li><strong>XGBoost</strong>: alto rendimiento con tuning.</li>
@@ -71,7 +149,7 @@
       </section>
 
       <section data-menu-title="Comparación">
-        <h2>5. Comparación (criterio preciso)</h2>
+        <h2>📈 5. Comparación (criterio preciso)</h2>
         <p>Métrica: <strong>F1</strong>. Adicionales: precisión, recall, ROC‑AUC. Reporte con CV y test.</p>
         <div id="chart-models" style="width:100%;height:360px;"></div>
         <script>
@@ -88,7 +166,7 @@
       </section>
 
       <section data-menu-title="Optimización">
-        <h2>6. Optimización</h2>
+        <h2>⚙️ 6. Optimización</h2>
         <ul>
           <li>Tuning: Random/Grid Search (p.ej. <code>n_estimators</code>, <code>max_depth</code>, <code>learning_rate</code>).</li>
           <li>Curvas de aprendizaje y validación.</li>
@@ -97,7 +175,7 @@
       </section>
 
       <section data-menu-title="Ética & Límites">
-        <h2>7. Limitaciones y ética</h2>
+        <h2>⚖️ 7. Limitaciones y ética</h2>
         <ul>
           <li>Sesgos de encuesta y cobertura por país/rol.</li>
           <li>Privacidad: datos públicos, sin PII.</li>
@@ -106,7 +184,7 @@
       </section>
 
       <section data-menu-title="Resultados">
-        <h2>8. Insights y decisiones</h2>
+        <h2>💡 8. Insights y decisiones</h2>
         <ul>
           <li>Mayor adopción de IA en roles Data/ML/Full‑Stack.</li>
           <li>Python asociado a uso intensivo de IA.</li>
@@ -115,7 +193,7 @@
       </section>
 
       <section data-menu-title="Reproducibilidad">
-        <h2>9. Reproducibilidad</h2>
+        <h2>🔁 9. Reproducibilidad</h2>
         <ul>
           <li>Notebook EDA: <code>notebooks/eda/</code></li>
           <li>Notebook Modelos: <code>notebooks/models/</code></li>
@@ -125,7 +203,7 @@
       </section>
 
       <section data-menu-title="Referencias">
-        <h2>10. Referencias</h2>
+        <h2>📚 10. Referencias</h2>
         <ol>
           <li>Stack Overflow (2025). <em>Annual Developer Survey 2025</em>. Kaggle.</li>
           <li>Pedregosa, F. et al. (2011). Scikit‑learn: JMLR.</li>
