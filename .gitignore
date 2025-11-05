@@ -11,3 +11,4 @@ __pycache__/
 
 # LaTeX build
 latex/build/
+survey_results_public.csv
