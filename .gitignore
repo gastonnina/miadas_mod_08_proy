@@ -1,0 +1,13 @@
+# Python / Jupyter
+__pycache__/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# Data (opcional: descomenta si no quieres subir datos)
+# data/raw/*
+# data/processed/*
+
+# LaTeX build
+latex/build/

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clasificación | Stack Overflow 2025 | Gaston Nina</title>
+
+  <!-- Reveal.js core & theme (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css" id="theme">
+  <!-- Menu plugin (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/dist/menu.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="hero-slide"
+               data-menu-title="Portada"
+               data-background-image="assets/img/home-hero.jpeg"
+               data-background-size="cover"
+               data-background-repeat="no-repeat"
+               data-background-position="center">
+        <h1>Adopción de IA</h1>
+        <p><span class="badge">Modelamiento de Datos I</span></p>
+        <p class="small">Autor: Gaston Nina Sossa</p>
+      </section>
+
+      <section data-menu-title="Problema">
+        <h2>1. Definición del problema</h2>
+        <ul>
+          <li><strong>Objetivo:</strong> predecir si un desarrollador <em>usa IA</em> (binario) o su nivel de uso (multiclase).</li>
+          <li><strong>Target:</strong> <code>AI_Usage</code> o <code>AI_Usage_Level</code>.</li>
+          <li><strong>Features:</strong> <code>DevType</code>, <code>YearsCodePro</code>, <code>LanguageWorkedWith</code>, <code>Country</code>, <code>RemoteWork</code>, <code>EdLevel</code>, <code>Salary</code>, etc.</li>
+        </ul>
+      </section>
+
+      <section data-menu-title="EDA (5 bivariados)">
+        <h2>2. EDA – 5 bivariados</h2>
+        <ol>
+          <li>DevType × AI_Usage — barras apiladas (%)</li>
+          <li>AI_Usage_Frequency × Salary — boxplots</li>
+          <li>LanguageWorkedWith × AI_Tools_Used — heatmap</li>
+          <li>YearsCodePro × Salary — scatter con tendencia</li>
+          <li>Country × AI_Usage — barras/choropleth</li>
+        </ol>
+        <p class="small">Inserta gráficos exportados o embebidos desde Plotly.</p>
+      </section>
+
+      <section data-menu-title="Técnica">
+        <h2>3. Técnica seleccionada</h2>
+        <p><strong>Regresión Logística</strong> (binaria) por interpretabilidad y baseline sólido.</p>
+        <ul>
+          <li>Métrica principal: <strong>F1-score</strong> (clase desbalanceada).</li>
+          <li>Validación: <strong>CV estratificada (k=5)</strong> + hold-out 20%.</li>
+          <li>Preprocesamiento: imputación, One-Hot, escalado (si aplica).</li>
+        </ul>
+      </section>
+
+      <section data-menu-title="Competidoras">
+        <h2>4. Técnicas competidoras</h2>
+        <ul>
+          <li><strong>Random Forest</strong>: no linealidades, importancia de variables.</li>
+          <li><strong>XGBoost</strong>: alto rendimiento con tuning.</li>
+        </ul>
+      </section>
+
+      <section data-menu-title="Comparación">
+        <h2>5. Comparación (criterio preciso)</h2>
+        <p>Métrica: <strong>F1</strong>. Adicionales: precisión, recall, ROC‑AUC. Reporte con CV y test.</p>
+        <div id="chart-models" style="width:100%;height:360px;"></div>
+        <script>
+          // Placeholder - remplaza con resultados reales
+          document.addEventListener('DOMContentLoaded', function () {
+            var el = document.getElementById('chart-models');
+            if (el) {
+              Plotly.newPlot(el, [{
+                type:'bar', x:['LogReg','RF','XGB'], y:[0.81,0.84,0.86]
+              }], {title:'F1 por modelo (ejemplo)', margin:{t:40}});
+            }
+          });
+        </script>
+      </section>
+
+      <section data-menu-title="Optimización">
+        <h2>6. Optimización</h2>
+        <ul>
+          <li>Tuning: Random/Grid Search (p.ej. <code>n_estimators</code>, <code>max_depth</code>, <code>learning_rate</code>).</li>
+          <li>Curvas de aprendizaje y validación.</li>
+          <li>Interpretabilidad: SHAP y feature importance.</li>
+        </ul>
+      </section>
+
+      <section data-menu-title="Ética & Límites">
+        <h2>7. Limitaciones y ética</h2>
+        <ul>
+          <li>Sesgos de encuesta y cobertura por país/rol.</li>
+          <li>Privacidad: datos públicos, sin PII.</li>
+          <li>Evitar <em>automation bias</em> en decisiones.</li>
+        </ul>
+      </section>
+
+      <section data-menu-title="Resultados">
+        <h2>8. Insights y decisiones</h2>
+        <ul>
+          <li>Mayor adopción de IA en roles Data/ML/Full‑Stack.</li>
+          <li>Python asociado a uso intensivo de IA.</li>
+          <li>Experiencia y remoto correlacionan positivamente.</li>
+        </ul>
+      </section>
+
+      <section data-menu-title="Reproducibilidad">
+        <h2>9. Reproducibilidad</h2>
+        <ul>
+          <li>Notebook EDA: <code>notebooks/eda/</code></li>
+          <li>Notebook Modelos: <code>notebooks/models/</code></li>
+          <li>Datos: <code>data/raw</code> y <code>data/processed</code></li>
+          <li>Repo: publicar en GitHub Pages (carpeta <code>docs/</code>).</li>
+        </ul>
+      </section>
+
+      <section data-menu-title="Referencias">
+        <h2>10. Referencias</h2>
+        <ol>
+          <li>Stack Overflow (2025). <em>Annual Developer Survey 2025</em>. Kaggle.</li>
+          <li>Pedregosa, F. et al. (2011). Scikit‑learn: JMLR.</li>
+          <li>Lundberg & Lee (2017). SHAP.</li>
+        </ol>
+        <footer class="site-footer">© 2025 · Sprint 1 · UMSA</footer>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js core -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <!-- Menu plugin -->
+  <script src="https://denehyg.github.io/reveal.js-menu/plugin/reveal.js-menu/menu.js"></script>
+
+  <!-- Init -->
+  <script>
+    Reveal.initialize({
+      hash: true,
+      controls: true,
+      progress: true,
+      slideNumber: 'c/t',
+      plugins: [ RevealMenu ],
+      menu: {
+        side: 'left',
+        numbers: true,
+        openButton: true,
+        themes: false,
+        transitions: false
+      }
+    });
+  </script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
