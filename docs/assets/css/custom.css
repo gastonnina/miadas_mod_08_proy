@@ -38,3 +38,24 @@ footer.site-footer { position: fixed; left:0; right:0; bottom:0; text-align:cent
   border: 0;
 }
 .reveal .slides section .small { font-size: 0.9rem; opacity: 0.8; }
+
+/* Tabla compacta para Reveal */
+.reveal .table-fit { max-height: 60vh; overflow: auto; margin-top: .75rem; }
+.reveal table.compact { width: 100%; table-layout: fixed; border-collapse: collapse;
+  font-size: clamp(12px, 1.6vw, 18px); }
+.reveal table.compact th, .reveal table.compact td { 
+  padding: .45em .6em; vertical-align: top; 
+}
+.reveal table.compact th:nth-child(1) { width: 20%; }
+.reveal table.compact th:nth-child(2) { width: 22%; }
+.reveal table.compact th:nth-child(3) { width: 58%; }
+
+/* Mejor envoltura de texto */
+.reveal table.compact th, .reveal table.compact td {
+  word-break: break-word; hyphens: auto;
+}
+
+/* Aún más compacto en pantallas pequeñas */
+@media (max-width: 900px){
+  .reveal table.compact { font-size: 12px; }
+}

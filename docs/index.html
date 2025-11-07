@@ -69,8 +69,28 @@
           <p>AI_Usage (binaria: 1=usa IA, 0=no) o AI_Usage_Level (multiclase).</p>
         </section>
         <section data-menu-title="Predictoras">
-          <h3>Predictoras candidatas</h3>
-          <p>DevType, YearsCodePro, LanguageWorkedWith, Country, RemoteWork, Industry, OrgSize, EdLevel, Salary.</p>
+          <h3>Predictoras usadas</h3>
+          <div class="table-fit">
+            <table class="compact">
+              <thead>
+                <tr>
+                  <th>Tipo de variable</th>
+                  <th>Columna</th>
+                  <th>Justificación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Profesional</td><td><b>DevType</b></td><td>El rol del desarrollador influye en la adopción de IA</td></tr>
+                <tr><td>Experiencia</td><td><b>WorkExp</b></td><td>Años de experiencia laboral</td></tr>
+                <tr><td>Tecnológica</td><td><b>LanguageHaveWorkedWith</b></td><td>Lenguajes usados (Python, R, etc.)</td></tr>
+                <tr><td>Geográfica</td><td><b>Country</b></td><td>Contexto regional y acceso a IA</td></tr>
+                <tr><td>Laboral</td><td><b>RemoteWork</b></td><td>Modalidad de trabajo</td></tr>
+                <tr><td>Sectorial</td><td><b>Industry</b></td><td>Tipo de industria o empresa</td></tr>
+                <tr><td>Organizacional</td><td><b>OrgSize</b></td><td>Tamaño de la empresa</td></tr>
+                <tr><td>Educativa</td><td><b>EdLevel</b></td><td>Nivel de formación formal</td></tr>
+              </tbody>
+            </table>
+          </div>
         </section>
         <section data-menu-title="Restricciones">
           <h3>Restricciones</h3>
