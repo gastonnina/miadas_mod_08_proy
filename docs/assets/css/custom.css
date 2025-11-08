@@ -37,6 +37,9 @@ footer.site-footer { position: fixed; left:0; right:0; bottom:0; text-align:cent
   height: 620px;
   border: 0;
 }
+/* .reveal .slides {
+  width: calc(100% - 350px) !important;
+} */
 .reveal .slides section .small { font-size: 0.9rem; opacity: 0.8; }
 
 /* Tabla compacta para Reveal */
