@@ -9,3 +9,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }], {title: 'Uso de IA por rol (ejemplo)', margin: {t: 40}});
   }
 });
+function toggleFullscreen(btn) {
+  const iframe = btn.nextElementSibling;
+
+  if (!iframe.classList.contains("fullscreen-iframe")) {
+    iframe.classList.add("fullscreen-iframe");
+    btn.textContent = "✖ Cerrar";
+  } else {
+    iframe.classList.remove("fullscreen-iframe");
+    btn.textContent = "🔍 Zoom";
+  }
+}
+

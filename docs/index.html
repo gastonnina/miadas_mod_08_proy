@@ -34,6 +34,7 @@
       <section data-menu-title="Introducción">
         <section>
           <h2>📘 Introducción</h2>
+          <p class="small">Use flecha ↓ para ver cada sección.</p>
         </section>
         <section data-menu-title="Contexto">
           <h3>Contexto</h3>
@@ -59,6 +60,7 @@
       <section data-menu-title="Definición del problema">
         <section>
           <h2>🧩 Definición del problema</h2>
+          <p class="small">Use flecha ↓ para ver cada sección.</p>
         </section>
         <section data-menu-title="Necesidad de negocio">
           <h3>Necesidad de negocio</h3>
@@ -66,7 +68,7 @@
         </section>
         <section data-menu-title="Variable objetivo">
           <h3>Variable objetivo</h3>
-          <p>AI_Usage (binaria: 1=usa IA, 0=no) o AI_Usage_Level (multiclase).</p>
+          <p>AI_Usage (binaria: 1=usa IA, 0=no)</p>
         </section>
         <section data-menu-title="Predictoras">
           <h3>Predictoras usadas</h3>
@@ -125,11 +127,29 @@
           style="
             height: 30vw;        /* mantiene proporciones */
             display: block;
-            margin: 2rem auto;   /* centrado vertical y horizontal */
+            margin: 0 auto;   /* centrado vertical y horizontal */
           "
         >
+        <p class="chart-caption">
+          Las correlaciones con <b>AI_Usage</b> son bajas; destacan <b>DevType</b> (0.19), <b>Country</b> (0.17), <b>Industry</b> (0.12), 
+          <b>OrgSize</b> (0.09), <b>EdLevel</b> (0.06) y <b>WorkExp</b> (-0.09) como factores con influencia leve pero contextual.
+        </p>
+        <aside class="notes">
+          En esta matriz las correlaciones con <b>AI_Usage</b> son en general bajas, 
+          pero permiten identificar patrones contextuales relevantes:
+          <ul>
+            <li><b>DevType (0.19):</b> los roles técnicos especializados, como científicos de datos o desarrolladores de IA, muestran mayor adopción.</li>
+            <li><b>Country (0.17):</b> la adopción es mayor en países con ecosistemas tecnológicos consolidados.</li>
+            <li><b>Industry (0.12):</b> sectores de software, fintech y telecomunicaciones lideran el uso de IA.</li>
+            <li><b>OrgSize (0.09):</b> las grandes empresas tienen más recursos para implementar IA, aunque también crece entre autónomos y startups.</li>
+            <li><b>EdLevel (0.06):</b> la educación universitaria y de posgrado facilita la adopción, pero el aprendizaje autodidacta reduce la brecha.</li>
+            <li><b>WorkExp (-0.09):</b> la relación negativa leve sugiere que la experiencia no determina el uso de IA; 
+                algunos perfiles junior la adoptan más rápido que los senior.</li>
+          </ul>
+          En conjunto, estas asociaciones confirman que el uso de IA depende de una combinación de factores 
+          laborales, educativos y organizacionales, más que de una sola variable dominante.
+        </aside>
       </section>
-
 
         <!-- 0. Metadatos del EDA -->
         <section data-menu-title="Metadatos del EDA">
@@ -141,30 +161,87 @@
         <section data-menu-title="DevType × IA">
           <h3>AI_Usage x WorkExp </h3>
           <iframe class="chart-frame" src="assets/charts/chart_1_b.html" loading="lazy"></iframe>
+          <p class="chart-caption">
+            Las medianas son similares, con ligera menor experiencia en quienes usan IA; hay outliers con mucha experiencia usando IA.
+          </p>
+          <aside class="notes">
+            Mediana: 12 (0) vs 11 (1). Rangos Intercuartilicos solapados: 7–21 (0) vs 5–18 (1).<br>
+            Diferencia pequeña; la adopción aparece en todo el rango de experiencia.<br>
+            Mencionar outliers ~38–40 años en “usa IA”. No inferir causalidad.
+          </aside>
         </section>
 
-        <!-- 2. AISelect × Salario -->
-        <section data-menu-title="IA × Salario">
-          <h3>AISelect × NumLanguages</h3>
+        <!-- 2. AISelect × NumLanguages -->
+        <section data-menu-title="AI_Usage × NumLanguages">
+          <h3>AI_Usage × NumLanguages</h3>
           <iframe class="chart-frame" src="assets/charts/chart_2_b.html" loading="lazy"></iframe>
+          <p class="chart-caption">
+            Ambos grupos usan un número similar de lenguajes, aunque los usuarios de IA muestran una ligera mayor diversidad.
+          </p>
+          <aside class="notes">
+            Este gráfico combina un boxplot y un histograma para comparar la distribución del número de lenguajes usados 
+            entre quienes usan IA y quienes no.  
+            Se observa que:
+            <ul>
+              <li>La mediana es cercana a 5 lenguajes en ambos grupos, sin diferencias marcadas.</li>
+              <li>Los usuarios de IA muestran una dispersión ligeramente mayor y más outliers, indicando más diversidad tecnológica.</li>
+              <li>Esto sugiere que el uso de IA no depende directamente de cuántos lenguajes se conozcan, 
+                  sino del tipo de lenguaje o la apertura a herramientas nuevas (p. ej. Python, R).</li>
+            </ul>
+            En síntesis, la cantidad de lenguajes es un factor neutro, pero puede reflejar una mayor curiosidad técnica entre quienes adoptan IA.
+          </aside>
         </section>
 
-        <!-- 3. Lenguajes × Modelos IA -->
-        <section data-menu-title="Lenguajes × Modelos IA">
+        <!-- 3. AI_Usage × Country -->
+        <section data-menu-title="AI_Usage × Country">
           <h3>AI_Usage × Country</h3>
           <iframe class="chart-frame" src="assets/charts/chart_3_b.html" loading="lazy"></iframe>
+          <p class="chart-caption">
+            La adopción de IA se concentra en polos tecnológicos como EE.UU., India, Reino Unido y Alemania.
+          </p>
+          <aside class="notes">
+            Este mapa mundial muestra la distribución geográfica de los encuestados que usan IA.  
+            Se aprecian patrones regionales marcados:
+            <ul>
+              <li>EE.UU. y la India destacan como los principales centros de adopción, seguidos de Reino Unido, Alemania y Canadá.</li>
+              <li>La concentración refleja ecosistemas tecnológicos maduros, alta inversión en IA y disponibilidad de infraestructura.</li>
+              <li>En Latinoamérica y África la adopción es menor, aunque se observa crecimiento en países con comunidades tecnológicas emergentes, como Brasil y México.</li>
+              <li>Esta variable sugiere que la adopción está influida por factores macroeconómicos y disponibilidad de recursos digitales.</li>
+            </ul>
+            En conjunto, <b>Country</b> (r ≈ 0.17) tiene una correlación leve pero significativa con <b>AI_Usage</b>, 
+            actuando como indicador del entorno tecnológico nacional.
+          </aside>
         </section>
 
         <!-- 4. WorkExp × Salario -->
        <section data-menu-title="IA × Industria">
           <h3>AI_Usage × Industry</h3>
-          <iframe class="chart-frame" src="assets/charts/chart_4_b.html" loading="lazy"></iframe>
+          <div class="chart-container">
+            <button class="zoom-btn" onclick="toggleFullscreen(this)">🔍 Zoom</button>
+            <iframe class="chart-frame" src="assets/charts/chart_4_b.html" loading="lazy"></iframe>
+          </div>
+          <p class="chart-caption">Las industrias tecnológicas presentan mayor adopción de IA.</p>
         </section>
 
-        <section data-menu-title="IA × Educación">
+        <section data-menu-title="AI_Usage × EdLevel">
           <h3>AI_Usage × EdLevel</h3>
           <iframe class="chart-frame" src="assets/charts/chart_5_b.html" loading="lazy"></iframe>
+          <p class="chart-caption">
+            La adopción de IA aumenta con la formación universitaria y de posgrado, aunque también crece entre técnicos.
+          </p>
+          <aside class="notes">
+            Este gráfico presenta la proporción de usuarios de IA según el nivel educativo alcanzado.  
+            Se observan patrones claros:
+            <ul>
+              <li>Los niveles de <b>licenciatura (Bachelor’s)</b> y <b>maestría (Master’s)</b> concentran las mayores tasas de adopción, cercanas al 80%.</li>
+              <li>También hay participación considerable entre quienes cursaron estudios universitarios incompletos o grados asociados, lo que sugiere democratización del acceso a la IA.</li>
+              <li>Los niveles más bajos (primaria o secundaria) muestran menor adopción, probablemente por menor exposición a herramientas tecnológicas.</li>
+              <li>En conjunto, la correlación con <b>AI_Usage</b> es baja (≈ 0.06), pero la tendencia indica que la educación facilita la adopción y comprensión de tecnologías emergentes.</li>
+            </ul>
+            Conclusión: el nivel educativo influye levemente, aunque la expansión de recursos de aprendizaje online está reduciendo las brechas tradicionales.
+          </aside>
         </section>
+
       </section>
 
       <section data-menu-title="Determinación de la técnica">
@@ -199,19 +276,6 @@
         <h2>📚 Referencias</h2>
       </section>
 
-
-      <section data-menu-title="EDA (5 bivariados)">
-        <h2>📊 2. EDA – 5 bivariados</h2>
-        <ol>
-          <li>DevType × AI_Usage — barras apiladas (%)</li>
-          <li>AI_Usage_Frequency × Salary — boxplots</li>
-          <li>LanguageWorkedWith × AI_Tools_Used — heatmap</li>
-          <li>YearsCodePro × Salary — scatter con tendencia</li>
-          <li>Country × AI_Usage — barras/choropleth</li>
-        </ol>
-        <p class="small">Inserta gráficos exportados o embebidos desde Plotly.</p>
-      </section>
-
     </div>
   </div>
 
@@ -219,6 +283,8 @@
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
   <!-- Menu plugin -->
   <script src="https://denehyg.github.io/reveal.js-menu/plugin/reveal.js-menu/menu.js"></script>
+  <!-- Plugin de notas (ruta actualizada, el archivo ya no vive en dist) -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
 
   <!-- Init -->
   <script>
@@ -227,7 +293,8 @@
       controls: true,
       progress: true,
       slideNumber: 'c/t',
-      plugins: [ RevealMenu ],
+      plugins: [ RevealMenu, RevealNotes],
+      mouseWheel: true,
       menu: {
         side: 'left',
         numbers: true,
