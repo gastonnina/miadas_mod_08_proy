@@ -22,6 +22,7 @@
   <div class="reveal">
     <div class="slides">
 
+      <!-- Portada -->
       <section class="hero-slide"
                data-menu-title="Portada"
                data-background-image="assets/img/home-hero.jpeg"
@@ -33,6 +34,7 @@
         <p class="small">Autor: Gaston Nina Sossa</p>
       </section>
 
+      <!-- Introducción (sin número de sección) -->
       <section data-menu-title="Introducción">
         <section>
           <h2>📘 Introducción</h2>
@@ -45,13 +47,13 @@
         </section>
         <section data-menu-title="Objetivo">
           <h3>Objetivo</h3>
-          <p>Predecir si un encuestado <em>usa IA</em> (Sí/No o Alta/Media/Baja frecuencia) a partir de su perfil técnico y demográfico.</p>
+          <p>Predecir si un encuestado <em>usa IA</em> (Sí/No) a partir de su perfil técnico y demográfico.</p>
         </section>
         <section data-menu-title="Pregunta de investigación">
           <h3>Tipo de modelo</h3>
           <p><strong>Clasificación</strong></p>
           <h3>Pregunta de investigación</h3>
-          <p class="question-callout">¿Podemos predecir la adopción de IA en desarrolladores 2025?</p>
+          <p class="question-callout">¿Podemos predecir la adopción de IA en desarrolladores utilizando su perfil profesional y tecnológico en 2025?</p>
         </section>
         <section data-menu-title="Criterio de éxito">
           <h3>Criterio de éxito</h3>
@@ -59,9 +61,11 @@
         </section>
       </section>
 
-      <section data-menu-title="Definición del problema">
+      <!-- SECCIÓN 1 – Definición del problema -->
+      <section data-menu-title="Sección 1 · Definición del problema">
         <section>
-          <h2>🧩 Definición del problema</h2>
+          <h2>🧩<br />- Sección 1 -<br />Definición del problema</h2>
+          <p class="small">Lineamientos de la Sección 1 del instructivo: problema de negocio, objetivo analítico y alcance.</p>
           <p class="small">Use flecha ↓ para ver cada sección.</p>
         </section>
         <section data-menu-title="Necesidad de negocio">
@@ -98,7 +102,10 @@
         </section>
         <section data-menu-title="Restricciones">
           <h3>Restricciones</h3>
-          <p>Sesgos de encuesta; categorías heterogéneas; datos faltantes.</p>
+          <ul>
+            <li>No se incluyen datos históricos previos al 2025</li>
+            <li>Dataset autodeclarado (posible sesgo de encuesta)</li>
+          </ul>
         </section>
         <section data-menu-title="Hipótesis">
           <h3>Hipótesis</h3>
@@ -106,10 +113,11 @@
         </section>
       </section>
 
-      <!-- EDA (5 bivariados) — vertical stack -->
-      <section data-menu-title="EDA (5 bivariados)">
+      <!-- SECCIÓN 2 – EDA (5 bivariados) -->
+      <section data-menu-title="Sección 2 · EDA (5 bivariados)">
         <section>
-          <h2>📊 2. EDA – 5 bivariados</h2>
+          <h2>📊<br />- Sección 2 -<br/> EDA – 5 bivariados</h2>
+          <p class="small">Exploración de la relación entre <b>AI_Usage</b> y variables clave, como insumo para la selección de la técnica analítica.</p>
           <ol>
             <li>AI_Usage x WorkExp — boxplots</li>
             <li>AI_Usage × NumLanguages — histograma</li>
@@ -122,36 +130,36 @@
 
          <!-- 0. Metadatos del EDA -->
         <section data-menu-title="Matriz de Correlación Mixta">
-        <h3>Matriz de Correlación Mixta</h3>
-        <img 
-          src="assets/charts/mixed_correlation_matrix_dark.png" 
-          alt="Matriz de Correlación Mixta"
-          style="
-            height: 30vw;        /* mantiene proporciones */
-            display: block;
-            margin: 0 auto;   /* centrado vertical y horizontal */
-          "
-        >
-        <p class="chart-caption">
-          Las correlaciones con <b>AI_Usage</b> son bajas; destacan <b>DevType</b> (0.19), <b>Country</b> (0.17), <b>Industry</b> (0.12), 
-          <b>OrgSize</b> (0.09), <b>EdLevel</b> (0.06) y <b>WorkExp</b> (-0.09) como factores con influencia leve pero contextual.
-        </p>
-        <aside class="notes">
-          En esta matriz las correlaciones con <b>AI_Usage</b> son en general bajas, 
-          pero permiten identificar patrones contextuales relevantes:
-          <ul>
-            <li><b>DevType (0.19):</b> los roles técnicos especializados, como científicos de datos o desarrolladores de IA, muestran mayor adopción.</li>
-            <li><b>Country (0.17):</b> la adopción es mayor en países con ecosistemas tecnológicos consolidados.</li>
-            <li><b>Industry (0.12):</b> sectores de software, fintech y telecomunicaciones lideran el uso de IA.</li>
-            <li><b>OrgSize (0.09):</b> las grandes empresas tienen más recursos para implementar IA, aunque también crece entre autónomos y startups.</li>
-            <li><b>EdLevel (0.06):</b> la educación universitaria y de posgrado facilita la adopción, pero el aprendizaje autodidacta reduce la brecha.</li>
-            <li><b>WorkExp (-0.09):</b> la relación negativa leve sugiere que la experiencia no determina el uso de IA; 
-                algunos perfiles junior la adoptan más rápido que los senior.</li>
-          </ul>
-          En conjunto, estas asociaciones confirman que el uso de IA depende de una combinación de factores 
-          laborales, educativos y organizacionales, más que de una sola variable dominante.
-        </aside>
-      </section>
+          <h3>Matriz de Correlación Mixta</h3>
+          <img 
+            src="assets/charts/mixed_correlation_matrix_dark.png" 
+            alt="Matriz de Correlación Mixta"
+            style="
+              height: 30vw;        /* mantiene proporciones */
+              display: block;
+              margin: 0 auto;   /* centrado vertical y horizontal */
+            "
+          >
+          <p class="chart-caption">
+            Las correlaciones con <b>AI_Usage</b> son bajas; destacan <b>DevType</b> (0.19), <b>Country</b> (0.17), <b>Industry</b> (0.12), 
+            <b>OrgSize</b> (0.09), <b>EdLevel</b> (0.06) y <b>WorkExp</b> (-0.09) como factores con influencia leve pero contextual.
+          </p>
+          <aside class="notes">
+            En esta matriz las correlaciones con <b>AI_Usage</b> son en general bajas, 
+            pero permiten identificar patrones contextuales relevantes:
+            <ul>
+              <li><b>DevType (0.19):</b> los roles técnicos especializados, como científicos de datos o desarrolladores de IA, muestran mayor adopción.</li>
+              <li><b>Country (0.17):</b> la adopción es mayor en países con ecosistemas tecnológicos consolidados.</li>
+              <li><b>Industry (0.12):</b> sectores de software, fintech y telecomunicaciones lideran el uso de IA.</li>
+              <li><b>OrgSize (0.09):</b> las grandes empresas tienen más recursos para implementar IA, aunque también crece entre autónomos y startups.</li>
+              <li><b>EdLevel (0.06):</b> la educación universitaria y de posgrado facilita la adopción, pero el aprendizaje autodidacta reduce la brecha.</li>
+              <li><b>WorkExp (-0.09):</b> la relación negativa leve sugiere que la experiencia no determina el uso de IA; 
+                  algunos perfiles junior la adoptan más rápido que los senior.</li>
+            </ul>
+            En conjunto, estas asociaciones confirman que el uso de IA depende de una combinación de factores 
+            laborales, educativos y organizacionales, más que de una sola variable dominante.
+          </aside>
+        </section>
 
         <!-- 0. Metadatos del EDA -->
         <section data-menu-title="Metadatos del EDA">
@@ -159,15 +167,15 @@
           <iframe class="chart-frame" src="assets/charts/eda_meta.html" loading="lazy"></iframe>
         </section>
 
-        <!-- 1. DevType × AISelect -->
-        <section data-menu-title="DevType × IA">
+        <!-- 1. DevType × WorkExp -->
+        <section data-menu-title="DevType × WorkExp">
           <h3>AI_Usage x WorkExp </h3>
           <iframe class="chart-frame" src="assets/charts/chart_1_b.html" loading="lazy"></iframe>
           <p class="chart-caption">
             Las medianas son similares, con ligera menor experiencia en quienes usan IA; hay outliers con mucha experiencia usando IA.
           </p>
           <aside class="notes">
-            Mediana: 12 (0) vs 11 (1). Rangos Intercuartilicos solapados: 7–21 (0) vs 5–18 (1).<br>
+            Mediana: 12 (0) vs 11 (1). Rangos Intercuartílicos solapados: 7–21 (0) vs 5–18 (1).<br>
             Diferencia pequeña; la adopción aparece en todo el rango de experiencia.<br>
             Mencionar outliers ~38–40 años en “usa IA”. No inferir causalidad.
           </aside>
@@ -215,8 +223,8 @@
           </aside>
         </section>
 
-        <!-- 4. WorkExp × Salario -->
-       <section data-menu-title="IA × Industria">
+        <!-- 4. WorkExp × Industry -->
+       <section data-menu-title="IA × Industry">
           <h3>AI_Usage × Industry</h3>
           <div class="chart-container">
             <button class="zoom-btn" onclick="toggleFullscreen(this)">🔍 Zoom</button>
@@ -246,22 +254,76 @@
 
       </section>
 
-      <section data-menu-title="Determinación de la técnica">
-        <h2>🛠️ Determinación de la técnica</h2>
+      <section data-menu-title="Sección 2 - Determinación de la técnica">
+        <section>
+          <h2>🛠️<br />- Sección 2 -<br /> Determinación de la técnica</h2>
+          <p class="small">Use flecha ↓ para ver cada sección.</p>
+        </section>
+
+        <section data-menu-title="2.1 Tipo de Problema">
+          <h3>2.1 Tipo de Problema</h3>
+
+          <ul>
+            <li><strong>Tipo de análisis:</strong> Clasificación supervisada</li>
+            <li><strong>Objetivo:</strong> Predecir si un desarrollador adopta IA</li>
+            <li><strong>Variable objetivo:</strong> <code>AI_Usage</code> (0/1)</li>
+            <li><strong>Naturaleza de los datos:</strong> Mezcla de variables categóricas <br> (DevType, Country, EdLevel…) y numéricas (WorkExp, NumLanguages)</li>
+            <li><strong>Evaluación:</strong> Métricas de clasificación (Accuracy, Recall, F1)</li>
+          </ul>
+
+          <aside class="notes">
+            Explicar que el dataset StackOverflow 2025 permite un enfoque totalmente supervisado porque ya conocemos quién usa o no usa IA.  
+            Justificar que la variable objetivo es binaria, por lo que aplica clasificación y no regresión.  
+            Comentar que el objetivo es probabilístico: queremos estimar la probabilidad de adopción.
+          </aside>
+        </section>
+
+        <section data-menu-title="2.2 Modelo Elegido">
+          <h3>2.2 Modelos Elegidos</h3>
+
+          <p>Para abordar el problema de clasificación se seleccionaron dos técnicas base, cada una evaluada en versiones con y sin balanceo:</p>
+
+          <ul>
+            <li><strong>Regresión Logística</strong>
+              <ul>
+                <li><strong>Sin balanceo:</strong> <code>LogisticRegression(max_iter=1000)</code></li>
+                <li><strong>Balanceado:</strong> <code>LogisticRegression(max_iter=1000, class_weight='balanced')</code></li>
+              </ul>
+            </li>
+
+            <li><strong>Random Forest</strong>
+              <ul>
+                <li><strong>Sin balanceo:</strong> <code>RandomForestClassifier(n_estimators=200, random_state=42)</code></li>
+                <li><strong>Balanceado:</strong> <code>RandomForestClassifier(n_estimators=200, random_state=42, class_weight='balanced')</code></li>
+              </ul>
+            </li>
+          </ul>
+
+          <p><strong>Motivación:</strong> evaluar el impacto del balanceo de clases debido al posible desbalance entre usuarios y no usuarios de IA.</p>
+
+          <aside class="notes">
+            Explicar que se eligieron dos familias de modelos: uno lineal (Regresión Logística) y uno no lineal (Random Forest), lo cual permite comparar interpretabilidad vs. capacidad predictiva.  
+            Aclarar que cada modelo se prueba en versión normal y con <code>class_weight='balanced'</code> para compensar el desbalance en la variable objetivo.  
+            Resaltar que este enfoque cumple el requerimiento del Sprint: técnica principal + alternativas competidoras.  
+            Comentar que el tuning profundo se realizará en la sección posterior de “Optimización”.
+          </aside>
+        </section>
+
       </section>
 
       <section data-menu-title="Técnicas competidoras">
-        <h2>⚔️ Técnicas competidoras</h2>
+        <h2>⚔️<br />- Sección 3 -<br />Técnicas competidoras</h2>
       </section>
 
       <section data-menu-title="Comparación (criterio preciso)">
-        <h2>📈 Comparación (criterio preciso)</h2>
+        <h2>📈<br />- Sección 4 -<br />Comparación (criterio preciso)</h2>
       </section>
 
       <section data-menu-title="Optimización">
-        <h2>⚙️ Optimización</h2>
+        <h2>⚙️<br />- Sección 5 -<br />Optimización</h2>
       </section>
 
+      <!-- Complementos -->
       <section data-menu-title="Limitaciones y ética">
         <h2>⚖️ Limitaciones y ética</h2>
       </section>
@@ -285,7 +347,7 @@
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
   <!-- Menu plugin -->
   <script src="https://denehyg.github.io/reveal.js-menu/plugin/reveal.js-menu/menu.js"></script>
-  <!-- Plugin de notas (ruta actualizada, el archivo ya no vive en dist) -->
+  <!-- Plugin de notas -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
 
   <!-- Init -->
@@ -295,7 +357,7 @@
       controls: true,
       progress: true,
       slideNumber: 'c/t',
-      plugins: [ RevealMenu, RevealNotes],
+      plugins: [ RevealMenu, RevealNotes ],
       mouseWheel: true,
       menu: {
         side: 'left',
@@ -309,3 +371,4 @@
   <script src="assets/js/app.js"></script>
 </body>
 </html>
+
