@@ -50,7 +50,6 @@
         <aside class="notes">
           Presento el Sprint 1 del módulo Modelamiento de Datos I.
           El proyecto aborda la predicción de adopción de IA en desarrolladores 2025 usando un modelo supervisado.
-          Esta portada contextualiza el trabajo, menciona el dataset y mi autoría.
         </aside>
       </section>
       <section data-menu-title="Índice General">
@@ -65,7 +64,6 @@
           <li><a href="#/9"><b>Limitaciones y Ética</b></a></li>
           <li><a href="#/10"><b>Insights y Decisiones</b></a></li>
           <li><a href="#/11"><b>Reproducibilidad</b></a></li>
-          <li><a href="#/12"><b>Referencias</b></a></li>
         </ol>
 
         <aside class="notes">
@@ -98,7 +96,7 @@
         </section>
         <section data-menu-title="Criterio de éxito">
           <h3>Criterio de éxito</h3>
-          <p>F1-score ≥ 0.80 en conjunto de prueba con validación cruzada estratificada (k=5).</p>
+          <p>F1-score ≥ 0.80 en conjunto de prueba con validación cruzada (k=5).</p>
         </section>
       </section>
 
@@ -117,6 +115,27 @@
           <h3>Variable objetivo</h3>
           <p>AI_Usage (binaria: 1=usa IA, 0=no)</p>
         </section>
+        <section data-menu-title="Variable Objetivo">
+          <h3>Pregunta original del dataset</h3>
+          <p><em>“Do you currently use AI tools in your development process?”</em></p>
+
+          <h3>Opciones del formulario</h3>
+          <ul>
+            <li>Yes, I use AI tools daily</li>
+            <li>Yes, I use AI tools weekly</li>
+            <li>Yes, I use AI tools monthly or infrequently</li>
+            <li>No, but I plan to soon</li>
+            <li>No, and I don't plan to</li>
+          </ul>
+
+          <pre><code>
+        AI_Usage = 1  →  Usa IA (Daily / Weekly / Monthly)
+        AI_Usage = 0  →  No usa IA (No / No y no planea)
+          </code></pre>
+
+          <p>Esta variable será la <strong>variable objetivo</strong> de nuestro modelo de clasificación.</p>
+        </section>
+
         <section data-menu-title="Predictoras">
           <h3>Predictoras usadas</h3>
           <div class="table-fit">
