@@ -443,7 +443,42 @@
       </section>
 
       <section data-menu-title="Técnicas competidoras">
-        <h2>⚔️<br />- Sección 3 -<br />Técnicas competidoras</h2>
+        <section>
+          <h2>⚔️<br />- Sección 3 -<br />Técnicas competidoras</h2>
+        </section>
+        <section data-menu-title="Resultados de Competidores">
+          <h3>📊 Resultados de Modelos Principales y Competidores</h3>
+
+          <div style="
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+          ">
+            <img 
+              src="assets/img/tabla_modelos.png" 
+              alt="Tabla de resultados de modelos"
+              style="
+                width: 85%;
+                border-radius: 12px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.45);
+              "
+            />
+          </div>
+
+          <p class="chart-caption">
+            Los mejores resultados se obtienen con <b>Random Forest (sin balance)</b> y 
+            <b>Logistic Regression (sin balance)</b>, ambos con F1-score ≈ 0.88.
+          </p>
+
+          <aside class="notes">
+            Comento que la captura proviene del notebook oficial del proyecto.
+            Explico que Random Forest sin balance alcanza el mejor F1 con 0.882,
+            seguido muy de cerca por Logistic Regression sin balance con 0.881.
+            Señalo que el balanceo no mejora el rendimiento y en el caso de LogReg incluso lo empeora.
+            Destaco que el criterio principal fue el F1-score por el leve desbalance de AI_Usage.
+          </aside>
+        </section>
+
       </section>
 
       <section data-menu-title="Comparación (criterio preciso)">
