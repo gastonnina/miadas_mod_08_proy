@@ -104,3 +104,37 @@ footer.site-footer { position: fixed; left:0; right:0; bottom:0; text-align:cent
   background: #000;
   border: none;
 }
+.scroll-panel {
+  scrollbar-width: thin;                 /* Firefox */
+  scrollbar-color: #888 #171717;         /* thumb / track */
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #171717;                   /* track oscuro */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;                      /* thumb gris */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;                      /* hover más claro */
+}
+
+/* Paneles internos con scroll (como el de 2.4) */
+.scroll-panel {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 1rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}

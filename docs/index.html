@@ -29,9 +29,50 @@
                data-background-size="cover"
                data-background-repeat="no-repeat"
                data-background-position="center">
-        <h1>Adopción de IA</h1>
-        <p><span class="badge">Modelamiento de Datos I</span></p>
-        <p class="small">Autor: Gaston Nina Sossa</p>
+        <div style="backdrop-filter: blur(6px); background: rgba(0,0,0,0.45); padding: 2rem; border-radius: 12px;">
+          <h1 style="font-size: 3rem; margin-bottom: .5rem;">
+            Modelo Supervisado para Predecir la Adopción de IA
+          </h1>
+
+          <h3 style="margin-top: 0; font-weight: 300; font-size: 1.5rem;">
+            Modelamiento de Datos I
+          </h3>
+
+          <p style="margin-top: 2rem; font-size: 1.2rem;">
+            <b>Autor:</b> Gaston Nina Sossa
+          </p>
+
+          <p style="font-size: .9rem; opacity: 0.8;">
+            <b>Dataset:</b> <a title="Ver el dataset" href="https://www.kaggle.com/datasets/edoardogalli/stack-overflow-annual-developer-survey-2025" target="_blank" rel="noopener">Stack Overflow Annual Developer Survey 2025</a>
+          </p>
+        </div>
+
+        <aside class="notes">
+          Presento el Sprint 1 del módulo Modelamiento de Datos I.
+          El proyecto aborda la predicción de adopción de IA en desarrolladores 2025 usando un modelo supervisado.
+          Esta portada contextualiza el trabajo, menciona el dataset y mi autoría.
+        </aside>
+      </section>
+      <section data-menu-title="Índice General">
+        <h2>🗂️ Índice General</h2>
+
+        <ol style="font-size:1.2rem; line-height:1.7;">
+          <li><a href="#/3"><b>Definición del Problema</b></a></li>
+          <li><a href="#/5"><b>Determinación de la Técnica Analítica</b></a></li>
+          <li><a href="#/6"><b>Técnicas Competidoras</b></a></li>
+          <li><a href="#/7"><b>Comparación con Criterio Preciso</b></a></li>
+          <li><a href="#/8"><b>Optimización del Modelo</b></a></li>
+          <li><a href="#/9"><b>Limitaciones y Ética</b></a></li>
+          <li><a href="#/10"><b>Insights y Decisiones</b></a></li>
+          <li><a href="#/11"><b>Reproducibilidad</b></a></li>
+          <li><a href="#/12"><b>Referencias</b></a></li>
+        </ol>
+
+        <aside class="notes">
+          El instructivo pide que el sitio web sea navegable y muestre claramente las secciones del Sprint.  
+          Este índice evidencia que sigo al 100% la estructura oficial.  
+          También le da al docente una referencia rápida para entender la ruta de la presentación.
+        </aside>
       </section>
 
       <!-- Introducción (sin número de sección) -->
@@ -278,37 +319,127 @@
           </aside>
         </section>
 
-        <section data-menu-title="2.2 Modelo Elegido">
-          <h3>2.2 Modelos Elegidos</h3>
+        <section data-menu-title="2.3 Justificación del Modelo">
+          <h3>2.3 Justificación del Modelo</h3>
 
-          <p>Para abordar el problema de clasificación se seleccionaron dos técnicas base, cada una evaluada en versiones con y sin balanceo:</p>
+          <div style="
+              display: flex;
+              gap: 2rem;
+              justify-content: center;
+              align-items: flex-start;
+              flex-wrap: wrap;
+              margin-top: 2rem;
+          ">
 
-          <ul>
-            <li><strong>Regresión Logística</strong>
+            <!-- Columna 1 -->
+            <div style="
+                flex: 1;
+                min-width: 260px;
+                background: rgba(255,255,255,0.05);
+                padding: 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 0 8px rgba(0,0,0,0.25);
+            ">
+              <h4 style="margin-top: 0;">Regresión Logística</h4>
               <ul>
-                <li><strong>Sin balanceo:</strong> <code>LogisticRegression(max_iter=1000)</code></li>
-                <li><strong>Balanceado:</strong> <code>LogisticRegression(max_iter=1000, class_weight='balanced')</code></li>
+                <li>Modelo interpretable</li>
+                <li>Forma un baseline sólido</li>
+                <li>Rápido y estable</li>
+                <li>Bueno para explicar factores de adopción</li>
               </ul>
-            </li>
+            </div>
 
-            <li><strong>Random Forest</strong>
+            <!-- Columna 2 -->
+            <div style="
+                flex: 1;
+                min-width: 260px;
+                background: rgba(255,255,255,0.05);
+                padding: 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 0 8px rgba(0,0,0,0.25);
+            ">
+              <h4 style="margin-top: 0;">Random Forest</h4>
               <ul>
-                <li><strong>Sin balanceo:</strong> <code>RandomForestClassifier(n_estimators=200, random_state=42)</code></li>
-                <li><strong>Balanceado:</strong> <code>RandomForestClassifier(n_estimators=200, random_state=42, class_weight='balanced')</code></li>
+                <li>Captura relaciones no lineales</li>
+                <li>Robusto frente a ruido y outliers</li>
+                <li>Mejor rendimiento en estructuras complejas</li>
+                <li>Aporta una visión complementaria</li>
               </ul>
-            </li>
-          </ul>
+            </div>
+          </div>
 
-          <p><strong>Motivación:</strong> evaluar el impacto del balanceo de clases debido al posible desbalance entre usuarios y no usuarios de IA.</p>
+          <div style="margin-top: 2rem; opacity: 0.85;">
+            <p><strong>Ambos modelos se probaron en versiones balanceadas</strong> para manejar el desbalance en <code>AI_Usage</code>.</p>
+          </div>
 
           <aside class="notes">
-            Explicar que se eligieron dos familias de modelos: uno lineal (Regresión Logística) y uno no lineal (Random Forest), lo cual permite comparar interpretabilidad vs. capacidad predictiva.  
-            Aclarar que cada modelo se prueba en versión normal y con <code>class_weight='balanced'</code> para compensar el desbalance en la variable objetivo.  
-            Resaltar que este enfoque cumple el requerimiento del Sprint: técnica principal + alternativas competidoras.  
-            Comentar que el tuning profundo se realizará en la sección posterior de “Optimización”.
+            Explicar que el Sprint pide justificar por qué se usan varios modelos.
+            Logística sirve como baseline interpretable y rápido.
+            Random Forest permite capturar patrones no lineales y suele mejorar el rendimiento.
+            Ajustar versiones balanceadas permite estudiar cómo impacta el desbalance de clases.
           </aside>
         </section>
+        <section data-menu-title="2.4 Funciones Matemáticas">
+          <h2>2.4 Funciones Matemáticas</h2>
 
+          <!-- CONTENEDOR SCROLL -->
+          <div class="scroll-panel">
+
+            <!-- REGRESIÓN LOGÍSTICA -->
+            <h3>📌 Regresión Logística</h3>
+
+            <p>
+              Modelo probabilístico que estima la probabilidad de que un desarrollador 
+              <strong>use IA</strong> a partir de una combinación lineal de variables predictoras.
+            </p>
+
+            <img 
+              src="assets/img/logistic_regression_formula.png"
+              alt="Fórmula regresión logística"
+              style="display:block; margin:1rem auto; width:70%; filter:brightness(3);"
+            />
+
+            <p><strong>Interpretación:</strong></p>
+            <ul>
+              <li><strong>P(Y = 1 | X)</strong> → probabilidad estimada de uso de IA.</li>
+              <li><strong>β₀</strong> → constante del modelo.</li>
+              <li><strong>βᵢ</strong> → influencia de cada predictor.</li>
+              <li><strong>σ(z)</strong> → función sigmoide para convertir a probabilidad.</li>
+            </ul>
+
+            <hr style="margin: 2rem 0; opacity:0.2;">
+
+            <!-- RANDOM FOREST -->
+            <h3>🌲 Random Forest</h3>
+
+            <p>
+              Modelo no lineal basado en múltiples árboles de decisión.  
+              Cada árbol vota por una clase, y la predicción final se obtiene por votación mayoritaria.
+            </p>
+
+            <img 
+              src="assets/img/random_forest_formula.png"
+              alt="Fórmula random forest"
+              style="display:block; margin:1rem auto; width:70%; filter:brightness(3);"
+            />
+
+            <p><strong>Interpretación:</strong></p>
+            <ul>
+              <li><strong>Tₖ(X)</strong> → predicción del árbol k.</li>
+              <li><strong>K</strong> → número total de árboles.</li>
+              <li><strong>Ŷ</strong> → clase final decidida por mayoría.</li>
+              <li>Robusto, captura relaciones no lineales y reduce sobreajuste.</li>
+            </ul>
+
+          </div>
+
+          <aside class="notes">
+            Este slide usa scroll para mostrar ambas funciones matemáticas sin saturar la pantalla.
+            Explico primero la regresión logística: modelo interpretable basado en probabilidad usando la sigmoide.
+            Luego explico Random Forest: un ensamble de árboles donde la predicción final es producto de un voto.
+            Al mostrar ambas funciones juntas en un mismo slide doy una visión clara de cómo opera cada modelo.
+          </aside>
+        </section>
       </section>
 
       <section data-menu-title="Técnicas competidoras">
@@ -371,4 +502,3 @@
   <script src="assets/js/app.js"></script>
 </body>
 </html>
-
