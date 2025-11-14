@@ -1,5 +1,5 @@
-Modelo,Accuracy,Precision (1),Recall (1),F1-score (1)
-Random Forest (sin balance),0.79,0.794,0.992,0.882
-Logistic Regression (sin balance),0.791,0.8,0.98,0.881
-Random Forest (balanceado),0.788,0.795,0.987,0.88
-Logistic Regression (balanceado),0.674,0.845,0.719,0.777
+Modelo,Accuracy,Precision (1),Recall (1),F1-score (1),ROC-AUC
+Random Forest (sin balance),0.79,0.794,0.992,0.882,0.648
+Logistic Regression (sin balance),0.791,0.8,0.98,0.881,0.673
+Random Forest (balanceado),0.788,0.795,0.987,0.88,0.659
+Logistic Regression (balanceado),0.674,0.845,0.719,0.777,0.667
