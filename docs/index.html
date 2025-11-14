@@ -207,6 +207,76 @@
           <h3>Metadatos del EDA</h3>
           <iframe class="chart-frame" src="assets/charts/eda_meta.html" loading="lazy"></iframe>
         </section>
+       <section data-menu-title="Metadatos del Dataset (naturaleza)">
+        <h3>📘 Metadatos del Dataset Limpio</h3>
+
+        <table class="compact" style="margin:auto; width:80%;">
+          <thead>
+            <tr>
+              <th>Columna</th>
+              <th>Tipo (pandas)</th>
+              <th>Naturaleza</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DevType</td>
+              <td>category</td>
+              <td>Categórica nominal (rol profesional)</td>
+            </tr>
+            <tr>
+              <td>WorkExp</td>
+              <td>float64</td>
+              <td>Numérica continua (años de experiencia)</td>
+            </tr>
+            <tr>
+              <td>Country</td>
+              <td>category</td>
+              <td>Categórica nominal (país)</td>
+            </tr>
+            <tr>
+              <td>RemoteWork</td>
+              <td>category</td>
+              <td>Categórica ordinal (grado de trabajo remoto)</td>
+            </tr>
+            <tr>
+              <td>Industry</td>
+              <td>category</td>
+              <td>Categórica nominal (sector/industria)</td>
+            </tr>
+            <tr>
+              <td>OrgSize</td>
+              <td>category</td>
+              <td>Categórica ordinal (rangos de tamaño de empresa)</td>
+            </tr>
+            <tr>
+              <td>EdLevel</td>
+              <td>category</td>
+              <td>Categórica ordinal (nivel educativo)</td>
+            </tr>
+            <tr>
+              <td>AI_Usage</td>
+              <td>int64</td>
+              <td>Binaria (variable objetivo: 0/1)</td>
+            </tr>
+            <tr>
+              <td>NumLanguages</td>
+              <td>int64</td>
+              <td>Numérica discreta (conteo de lenguajes)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <aside class="notes">
+          Esta tabla resume la estructura final del dataset limpio después del procesamiento.
+          Explicar: las variables categóricas se convierten a 'category' para mejorar memoria y rendimiento.
+          LanguageHaveWorkedWith se mantiene como object por ser multietiqueta.
+          RemoteWork, OrgSize y EdLevel son ordinales aunque se representen como categorías.
+          AI_Usage es la variable objetivo binaria.
+          NumLanguages es un conteo derivado de la columna multivalor.
+        </aside>
+      </section>
+
 
         <!-- 1. DevType × WorkExp -->
         <section data-menu-title="DevType × WorkExp">
