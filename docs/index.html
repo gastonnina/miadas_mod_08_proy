@@ -65,12 +65,6 @@
           <li><a href="#/10"><b>Insights y Decisiones</b></a></li>
           <li><a href="#/11"><b>Reproducibilidad</b></a></li>
         </ol>
-
-        <aside class="notes">
-          El instructivo pide que el sitio web sea navegable y muestre claramente las secciones del Sprint.  
-          Este índice evidencia que sigo al 100% la estructura oficial.  
-          También le da al docente una referencia rápida para entender la ruta de la presentación.
-        </aside>
       </section>
 
       <!-- Introducción (sin número de sección) -->
@@ -560,11 +554,11 @@
           </p>
 
           <aside class="notes">
-            Comento que la captura proviene del notebook oficial del proyecto.
-            Explico que Random Forest sin balance alcanza el mejor F1 con 0.882,
-            seguido muy de cerca por Logistic Regression sin balance con 0.881.
-            Señalo que el balanceo no mejora el rendimiento y en el caso de LogReg incluso lo empeora.
-            Destaco que el criterio principal fue el F1-score por el leve desbalance de AI_Usage.
+            Comento que la captura proviene del notebook oficial del proyecto.<br>
+            Explico que Random Forest sin balance alcanza el mejor F1 con 0.882,<br>
+            seguido muy de cerca por Logistic Regression sin balance con 0.881.<br>
+            Señalo que el balanceo no mejora el rendimiento y en el caso de LogReg incluso lo empeora.<br>
+            Destaco que el criterio principal fue el F1-score por el leve desbalance de AI_Usage.<br>
           </aside>
         </section>
         <section data-menu-title="Comparación de Métricas">
@@ -590,8 +584,14 @@
           </p>
 
           <aside class="notes">
-            Esta visualización permite comparar rápidamente el comportamiento de los cuatro modelos: 
-            Logistic Regression sin balance, Random Forest sin balance, y las versiones balanceadas de ambos.
+            Esta gráfica compara las métricas clave de los cuatro modelos. <br>
+            Se observa que los modelos sin balancear —Random Forest y Logistic Regression— tienen el mejor rendimiento general, especialmente en F1-score, superando el criterio de éxito definido para el proyecto.
+
+            Las versiones balanceadas no mejoran el desempeño y, en el caso de Logistic Regression, incluso reducen el Recall de manera considerable.<br>
+
+            En conjunto, los modelos sin balancear son más estables, más precisos y ofrecen un mejor equilibrio entre Precision y Recall. <br>
+            Por eso, Logistic Regression sin balance se selecciona como el modelo final.
+
           </aside>
         </section>
 
@@ -618,7 +618,7 @@
 
           <aside class="notes">
             Esta matriz muestra que Logistic Regression identifica correctamente más de 5100 casos de uso de IA (class 1),
-            aunque comete algunos falsos positivos en la clase 0.  
+            aunque comete algunos falsos positivos en la clase 0.  <br>
             Es consistente con un F1 ≈ 0.88.
           </aside>
         </section>
@@ -644,7 +644,7 @@
 
           <aside class="notes">
             Esta matriz muestra que Random Forest reduce falsos negativos comparado con LogReg,
-            mejorando ligeramente el recall de clase 0.  
+            mejorando ligeramente el recall de clase 0.  <br>
             Esto explica por qué ambos modelos tienen F1 casi idéntico.
           </aside>
         </section>
@@ -670,10 +670,10 @@
           </p>
 
           <aside class="notes">
-            La curva ROC evalúa la capacidad del modelo para separar las clases en todos los umbrales posibles.
-            Un AUC de 0.65–0.67 significa que el modelo discrimina mejor que el azar, pero el problema presenta alta superposición entre clases.
-            Logistic Regression sin balance logra el mejor AUC (0.673), confirmando consistencia con la validación cruzada y métricas previas.
-            Random Forest logra valores cercanos, especialmente en su versión balanceada.
+            La curva ROC evalúa la capacidad del modelo para separar las clases en todos los umbrales posibles.<br>
+            Un AUC de 0.65–0.67 significa que el modelo discrimina mejor que el azar, pero el problema presenta alta superposición entre clases.<br>
+            Logistic Regression sin balance logra el mejor AUC (0.673), confirmando consistencia con la validación cruzada y métricas previas.<br>
+            Random Forest logra valores cercanos, especialmente en su versión balanceada.<br>
             A diferencia de F1, el AUC refleja sensibilidad vs. especificidad, útil cuando la clase minoritaria tiene relevancia.
           </aside>
         </section>
@@ -707,51 +707,11 @@
           </p>
 
           <aside class="notes">
-            • La validación cruzada estratificada k=5 divide los datos en cinco subconjuntos con la misma proporción de clases.
-            • En cada iteración, el modelo se entrena con 4 folds y se evalúa en el fold restante.
-            • Este proceso reduce la dependencia de un único train/test split y produce métricas más estables.
-            • Logistic Regression sin balance obtuvo un F1 promedio de 0.8817 y una desviación estándar extremadamente baja (0.0015),
-              lo que indica un desempeño consistente en todos los subconjuntos.
-            • Random Forest sin balance también obtuvo un desempeño alto (0.8752), pero con mayor variabilidad.
-            • Ambos modelos superaron el criterio de éxito (F1 ≥ 0.80), pero la regresión logística se destaca por estabilidad y eficiencia computacional.
-          </aside>
-        </section>
-        <section data-menu-title="Validación Cruzada">
-          <h3>🔁 Validación Cruzada Estratificada (k=5)</h3>
-
-          <p style="font-size:1.1rem; margin-top:1rem;">
-            Se aplicó validación cruzada estratificada con <b>k=5</b> para estimar el rendimiento real de los modelos.
-            Este método divide el dataset en 5 partes manteniendo la proporción de clases (0/1).
-          </p>
-
-          <div style="
-            display:flex;
-            justify-content:center;
-            margin: 1.2rem 0;
-          ">
-            <img 
-              src="assets/img/cv_results.png"
-              alt="Resultados de validación cruzada k=5"
-              style="
-                width: 55%;
-                border-radius: 12px;
-                box-shadow: 0 0 18px rgba(0,0,0,0.45);
-              "
-            />
-          </div>
-
-          <p class="chart-caption">
-            La regresión logística sin balance logró el mejor F1 promedio (0.8817) con la menor variabilidad, 
-            confirmando su estabilidad y generalización.
-          </p>
-
-          <aside class="notes">
-            • La validación cruzada estratificada k=5 divide los datos en cinco subconjuntos con la misma proporción de clases.
-            • En cada iteración, el modelo se entrena con 4 folds y se evalúa en el fold restante.
-            • Este proceso reduce la dependencia de un único train/test split y produce métricas más estables.
-            • Logistic Regression sin balance obtuvo un F1 promedio de 0.8817 y una desviación estándar extremadamente baja (0.0015),
-              lo que indica un desempeño consistente en todos los subconjuntos.
-            • Random Forest sin balance también obtuvo un desempeño alto (0.8752), pero con mayor variabilidad.
+            • La validación cruzada estratificada k=5 divide los datos en cinco subconjuntos con la misma proporción de clases.<br>
+            • En cada iteración, el modelo se entrena con 4 folds y se evalúa en el fold restante.<br>
+            • Este proceso reduce la dependencia de un único train/test split y produce métricas más estables.<br>
+            • Logistic Regression sin balance obtuvo un F1 promedio de 0.8817 y una desviación estándar extremadamente baja (0.0015), lo que indica un desempeño consistente en todos los subconjuntos.<br>
+            • Random Forest sin balance también obtuvo un desempeño alto (0.8752), pero con mayor variabilidad.<br>
             • Ambos modelos superaron el criterio de éxito (F1 ≥ 0.80), pero la regresión logística se destaca por estabilidad y eficiencia computacional.
           </aside>
         </section>
