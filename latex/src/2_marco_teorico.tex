@@ -1,0 +1,370 @@
+\newpage
+\thispagestyle{empty}
+\vspace*{0.35\textheight}
+\begin{center}
+	{\Huge\textbf{CAPÍTULO II}} \\[0.5cm]
+	{\Huge\textbf{MARCO TEÓRICO}}
+\end{center}
+
+\newpage
+\chapter{MARCO TEÓRICO}
+
+\section{Estado del arte}
+    \subsection{Investigaciones nacionales}
+
+    En el ámbito hispanohablante, algunos trabajos previos han explorado aspectos del análisis de letras musicales desde el PLN. Parra (2013) aplicó modelado de tópicos (LDA) para agrupar letras según temática en canciones en español \parencite{Parra2013}, mientras que Mamani Lucero (2024) evaluó distintos métodos de preprocesamiento de textos creativos, incluyendo lematización y extracción de n-gramas, en un corpus de letras hispanoamericanas \parencite{Mamani2024}.
+
+    \subsection{Investigaciones internacionales}
+    A nivel internacional, Zhang \& Wang (2024) clasificaron canciones por emoción usando entornos de aprendizaje profundo, Wardana et al. (2024) compararon FastText y TF-IDF para análisis de sentimiento en redes sociales, y Hassan et al. (2022) contrastaron diversos algoritmos supervisados en la clasificación de textos musicales \parencite{Zhang2024,Wardana2024,Hassan2022}.
+
+\section{Fundamentación teórica}
+
+\subsection{Introducción a la Música en Español}
+La música en español representa una de las expresiones culturales más influyentes en el mundo hispanohablante. Desde géneros tradicionales como el flamenco, la ranchera y el tango, hasta manifestaciones contemporáneas como el reguetón, el pop latino y la música urbana, este repertorio musical ha evolucionado reflejando cambios sociales, políticos y culturales a lo largo del tiempo \parencite{Diaz2020, Moreno2019}. En particular, las letras de canciones constituyen un corpus lingüístico valioso que revela aspectos identitarios, emocionales y estéticos propios de las comunidades hispanas.
+\subsection{Definición}
+La música en español se define como aquella cuya interpretación vocal y lírica se realiza en lengua española, independientemente de su origen geográfico. Esta clasificación incluye producciones musicales de América Latina, España y otras regiones con comunidades hispanohablantes. Las letras de canciones en español no solo cumplen una función estética, sino también comunicativa, educativa y simbólica, constituyéndose en artefactos discursivos dignos de análisis lingüístico y computacional \parencite{Gonzalez2021}.
+
+
+\subsubsection{Indicadores de Éxito: Premios, Popularidad y Reconocimiento}
+El éxito musical puede ser evaluado desde múltiples perspectivas. Algunos de los indicadores más utilizados incluyen la obtención de premios oficiales (como los Latin Grammy o los discos de oro y platino otorgados por instituciones como la RIAA), el número de reproducciones en plataformas digitales, la presencia en rankings de popularidad, y el nivel de engagement del público en redes sociales y medios de comunicación \parencite{IFPI2023, RIAA2022}. Estos parámetros permiten cuantificar la recepción de una obra musical y son comúnmente usados en estudios de análisis de tendencias culturales.
+
+\subsubsection{La RIAA y su rol en la industria musical}
+
+La Recording Industry Association of America (\textit{RIAA}) es una organización estadounidense que representa a la industria discográfica de ese país. Esta institución se encarga de la certificación de ventas de álbumes y sencillos, otorgando premios como disco de oro, platino, multiplatino y diamante, los cuales son considerados como indicadores de éxito musical. Su reconocimiento se basa en criterios de ventas físicas, descargas digitales y reproducciones en plataformas de \textit{streaming}.
+
+\subsubsection{Certificaciones de la RIAA: Oro, Platino y Diamante}
+
+La \textit{Recording Industry Association of America} (RIAA) otorga certificaciones que reconocen el éxito comercial de producciones musicales en los Estados Unidos. Estas certificaciones se basan en el número total de unidades vendidas, incluyendo ventas físicas, descargas digitales y reproducciones en plataformas de \textit{streaming}. Los niveles de certificación más comunes son:
+
+\begin{itemize}
+  \item \textbf{Disco de Oro}: 500.000 unidades vendidas.
+  \item \textbf{Disco de Platino}: 1.000.000 unidades vendidas.
+  \item \textbf{Disco de Multiplatino}: múltiplos de 1.000.000 unidades (por ejemplo, Doble Platino: 2.000.000).
+  \item \textbf{Disco de Diamante}: 10.000.000 unidades vendidas.
+\end{itemize}
+
+Desde 2016, la RIAA incluye en sus métricas de certificación las reproducciones en línea, estableciendo que 150 reproducciones equivalen a una unidad vendida para fines de certificación. Este cambio refleja la transformación del consumo musical en la era digital y mantiene la validez de las certificaciones como indicador de éxito musical \parencite{RIAA2022}.
+
+    \subsection{Inteligencia Artificial}
+
+    La Inteligencia Artificial (IA) es la disciplina que busca crear sistemas capaces de realizar tareas que, al ser ejecutadas por humanos, requieren inteligencia. En el contexto de esta tesis, se emplean técnicas de IA centradas en el aprendizaje automático para el análisis de texto.
+
+    \subsubsection{Aprendizaje automático}
+
+    El Aprendizaje Automático (Machine Learning) es el campo de la IA que desarrolla algoritmos capaces de aprender patrones a partir de datos, sin ser explícitamente programados para cada tarea.
+
+    \subsubsection{Aprendizaje supervisado}
+
+Dentro del aprendizaje automático, el Aprendizaje Supervisado consiste en entrenar modelos a partir de ejemplos etiquetados, de manera que puedan predecir la etiqueta de nuevos datos no vistos.
+
+    \subsection{Procesamiento de Lenguaje Natural}
+
+    El Procesamiento de Lenguaje Natural (PLN) es la rama de la IA dedicada al análisis y generación de lenguaje humano por medio de métodos computacionales, abarcando tareas como tokenización, análisis sintáctico y extracción de características léxico-semánticas.
+
+    \subsection{Modelos de Clasificación Supervisada}
+
+Los modelos de clasificación supervisada permiten predecir una categoría a partir de un conjunto de datos etiquetado. En el contexto del procesamiento de lenguaje natural, estos modelos se entrenan sobre representaciones numéricas del texto, como TF-IDF, y han demostrado ser eficaces para tareas como clasificación de sentimientos, spam o análisis de opiniones \parencite{manning2008, jurafsky2021}.
+
+En el presente estudio se evaluaron cinco algoritmos de clasificación binaria con el objetivo de predecir si una canción en español ha sido premiada o no, basándose exclusivamente en su letra. A continuación se describen los principales modelos utilizados.
+
+\subsubsection{Naive Bayes}
+
+\paragraph{Fundamentos Teóricos}
+
+El algoritmo \textit{Naive Bayes} se fundamenta en el teorema de Bayes, que permite calcular la probabilidad de una clase \( C \) dada una observación \( X \):
+
+\[
+P(C|X) = \frac{P(X|C) \cdot P(C)}{P(X)}
+\]
+
+Bajo la hipótesis de independencia condicional entre características:
+
+\[
+P(X|C) = \prod_{i=1}^{n} P(x_i | C)
+\]
+
+Este supuesto “naive” simplifica el cálculo de probabilidades en problemas de alta dimensionalidad como el análisis de texto, donde se usan representaciones vectoriales como \textit{bag-of-words} o \textit{TF-IDF} \parencite{manning2008}.
+
+\paragraph{Ventajas y Consideraciones Prácticas}
+
+Destaca por su simplicidad, velocidad de entrenamiento y capacidad para manejar ruido y datos dispersos. Sin embargo, su desempeño puede verse afectado cuando la independencia entre términos no se cumple, como ocurre en construcciones lingüísticas complejas \parencite{jurafsky2021}.
+
+\paragraph{Aplicación en Problemas de Texto}
+
+Se ha utilizado exitosamente en clasificación de correos electrónicos, sentimientos, y categorías de noticias. En este trabajo, se aplica para clasificar letras de canciones como premiadas o no premiadas a partir de la distribución de sus términos ponderados por \textit{TF-IDF}.
+
+\subsubsection{Regresión Logística}
+
+\paragraph{Fundamentos Teóricos}
+
+La \textit{Regresión Logística} modela la probabilidad de que una observación pertenezca a una clase mediante la función sigmoide:
+
+\[
+P(C=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \dots + \beta_n x_n)}}
+\]
+
+Los coeficientes \( \beta_i \) se estiman maximizando la verosimilitud de los datos observados. Es un modelo lineal para clasificación binaria que permite interpretar la influencia de cada variable sobre la probabilidad de la clase positiva \parencite{hosmer2013applied}.
+
+\paragraph{Ventajas y Consideraciones Prácticas}
+
+Es fácil de implementar, interpretable y robusto ante ruido moderado. Sin embargo, su capacidad de modelar relaciones no lineales es limitada.
+
+\paragraph{Aplicación en Problemas de Texto}
+
+Se emplea comúnmente en tareas de clasificación textual como análisis de sentimiento y detección de temas. En este proyecto, se utiliza para predecir si una canción ha sido premiada, a partir de sus características vectorizadas mediante \textit{TF-IDF}.
+
+\subsubsection{Máquinas de Vectores de Soporte (SVM)}
+
+\paragraph{Fundamentos Teóricos}
+
+Las \textit{SVM} buscan el hiperplano que mejor separa las clases en un espacio de características, maximizando el margen entre las observaciones más cercanas (vectores de soporte). Su versión lineal, \textit{LinearSVC}, es especialmente eficaz en espacios de alta dimensionalidad como los generados por TF-IDF \parencite{joachims1998text}.
+
+\paragraph{Ventajas y Consideraciones Prácticas}
+
+Ofrecen buen rendimiento incluso en presencia de ruido y cuando las clases no están perfectamente separadas. Su entrenamiento puede ser costoso computacionalmente, pero es muy eficaz con representaciones esparsas.
+
+\paragraph{Aplicación en Problemas de Texto}
+
+Son ampliamente utilizadas en clasificación de texto, spam y minería de opiniones. En este estudio, la SVM se empleó como alternativa robusta para predecir la clase premiada o no premiada de una canción.
+
+\subsubsection{Random Forest}
+
+\paragraph{Fundamentos Teóricos}
+
+\textit{Random Forest} es un método de ensamble que construye múltiples árboles de decisión a partir de subconjuntos aleatorios del conjunto de datos y de las variables, combinando sus predicciones mediante votación mayoritaria \parencite{breiman2001random}.
+
+\paragraph{Ventajas y Consideraciones Prácticas}
+
+Presenta alta precisión, es robusto al sobreajuste y puede capturar relaciones no lineales entre variables. Sin embargo, su interpretabilidad es más limitada que la de modelos lineales.
+
+\paragraph{Aplicación en Problemas de Texto}
+
+En tareas de PLN, puede manejar grandes cantidades de variables (como términos TF-IDF). En este trabajo, fue el modelo con mejor desempeño en validación cruzada sobre el conjunto balanceado.
+
+\subsubsection{XGBoost}
+
+\paragraph{Fundamentos Teóricos}
+
+\textit{XGBoost} es un algoritmo de boosting basado en árboles que entrena modelos secuencialmente, corrigiendo errores previos mediante el descenso del gradiente. Su objetivo es minimizar una función de pérdida regularizada, mejorando la generalización \parencite{chen2016xgboost}.
+
+\paragraph{Ventajas y Consideraciones Prácticas}
+
+Es eficiente, escalable y tolerante al ruido. Su rendimiento ha sido demostrado en múltiples competencias de ciencia de datos, aunque requiere ajuste fino de hiperparámetros.
+
+\paragraph{Aplicación en Problemas de Texto}
+
+Se aplica con éxito a problemas de clasificación estructurada y análisis de texto. En esta monografía, fue evaluado como modelo complementario, destacando por su estabilidad ante datos textuales ruidosos.
+
+
+\subsection{Métricas de Rendimiento: \textit{Accuracy, Precision, Recall, F1-score}}
+
+Las métricas más utilizadas en clasificación binaria son:
+
+\begin{itemize}
+	\item \textbf{\textit{Accuracy} (Precisión global)}: Proporción de predicciones correctas sobre el total.
+	      \[
+		      \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+	      \]
+
+	\item \textbf{\textit{Precision}}: Proporción de verdaderos positivos entre todos los elementos clasificados como positivos.
+	      \[
+		      \text{Precision} = \frac{TP}{TP + FP}
+	      \]
+	\item \textbf{\textit{Recall} (Sensibilidad)}: Proporción de verdaderos positivos entre todos los elementos que realmente son positivos.
+	      \[
+		      \text{Recall} = \frac{TP}{TP + FN}
+	      \]
+
+	\item \textbf{\textit{F1-score}}: Media armónica entre precisión y recall, útil en contextos donde el equilibrio entre ambas es importante.
+	      \[
+		      \text{F1} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+	      \]
+\end{itemize}
+
+Estas métricas permiten evaluar distintos aspectos del comportamiento del modelo y ayudan a identificar posibles sesgos, especialmente cuando hay clases desbalanceadas.
+
+\subsection{Matriz de Confusión}
+
+La matriz de confusión es una herramienta visual que resume el rendimiento del modelo, mostrando las verdaderas clases versus las predichas. Se compone de cuatro celdas:
+
+\begin{itemize}
+	\item \textbf{TP (\textit{True Positive})}: verdaderos positivos
+	\item \textbf{TN (\textit{True Negative})}: verdaderos negativos
+	\item \textbf{FP (\textit{False Positive})}: falsos positivos
+	\item \textbf{FN (\textit{False Negative})}: falsos negativos
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/02_matriz_confusion.png}
+	\caption{Matriz de confusión y sus métricas}
+	\label{fig:confusion}
+\end{figure}
+
+\subsection{Consideraciones al Evaluar Modelos en Textos Musicales}
+
+Los datos textuales, especialmente aquellos con contenido artístico o lírico, pueden contener ambigüedad semántica, redundancias o estilos de escritura variados que afectan la representación vectorial y, por tanto, el rendimiento del modelo. Además, en problemas con clases desbalanceadas (por ejemplo, pocas canciones premiadas respecto a las no premiadas), es necesario complementar la métrica de accuracy con otras como el F1-score para una evaluación más robusta \parencite{Jurafsky2021}.
+
+\subsection{Técnicas de Balanceo de Datos}
+
+En problemas de clasificación supervisada, es común enfrentar conjuntos de datos desbalanceados, donde una clase tiene significativamente más instancias que la otra. Esta situación puede afectar el rendimiento del modelo, ya que los algoritmos tienden a favorecer la clase mayoritaria, reduciendo la capacidad de detectar correctamente la clase minoritaria \cite{he2009learning}.
+
+Para mitigar este problema, existen diversas estrategias de balanceo de clases, entre las cuales destacan las siguientes:
+
+\subsubsection{Submuestreo (\textit{Undersampling})}
+
+El submuestreo consiste en reducir el número de instancias de la clase mayoritaria para equilibrar la proporción con respecto a la clase minoritaria. Esta técnica puede implementarse de forma aleatoria o mediante métodos más sofisticados que seleccionan las instancias más representativas. Aunque puede conducir a pérdida de información, es útil cuando se dispone de grandes volúmenes de datos de la clase dominante.
+
+\subsubsection{Sobremuestreo (\textit{Oversampling})}
+
+El sobremuestreo, por el contrario, incrementa el número de instancias de la clase minoritaria, ya sea duplicando ejemplos existentes o generando nuevos sintéticos. Un método ampliamente utilizado es SMOTE (Synthetic Minority Over-sampling Technique), que crea nuevas instancias a partir de interpolaciones entre ejemplos cercanos de la clase minoritaria.
+
+\subsubsection{Combinación de técnicas}
+
+En algunos casos, se aplican enfoques híbridos que combinan sobremuestreo de la clase minoritaria con submuestreo de la clase mayoritaria. Esta estrategia busca aprovechar lo mejor de ambos métodos, reduciendo el sesgo y manteniendo la variabilidad de los datos.
+
+La elección de la técnica de balanceo adecuada depende del tamaño del conjunto de datos, la naturaleza del problema y los algoritmos de clasificación utilizados. En la práctica, es recomendable evaluar el impacto de cada técnica mediante validación cruzada y métricas de rendimiento específicas.
+
+\subsection{\textit{CRISP-DM}: Proceso Estándar de Minería de Datos}
+
+\textit{CRISP-DM} (\textit{Cross Industry Standard Process for Data Mining}) es un modelo metodológico desarrollado a fines de los años 90 con el objetivo de estandarizar el proceso de minería de datos en distintos dominios. Fue propuesto por un consorcio europeo liderado por Daimler-Benz, SPSS y NCR, y está compuesto por seis fases principales: comprensión del negocio, comprensión de los datos, preparación de los datos, modelado, evaluación y despliegue \parencite{wirth2000crisp}.
+
+Este enfoque permite organizar y estructurar proyectos de análisis de datos de manera flexible e iterativa, adaptándose a los cambios y necesidades que puedan surgir durante el desarrollo. Su amplia adopción tanto en entornos industriales como académicos se debe a su claridad, modularidad y enfoque práctico. A diferencia de otros métodos más rígidos, \textit{CRISP-DM} promueve un flujo de trabajo no lineal, donde es común regresar a fases anteriores para ajustar decisiones, reentrenar modelos o incorporar nuevas fuentes de datos.
+
+Además, el modelo es independiente de herramientas y técnicas específicas, lo que lo hace aplicable a una variedad de contextos tecnológicos y disciplinas, incluyendo proyectos de clasificación supervisada, análisis de texto y ciencia de datos aplicada.
+
+\subsubsection{Fases del proceso \textit{CRISP-DM}}
+
+Las seis fases que componen el modelo se describen a continuación:
+
+\begin{enumerate}
+	\item \textbf{Comprensión del negocio:} En esta fase se define claramente el problema desde una perspectiva no técnica, alineando los objetivos del proyecto con las necesidades estratégicas de la organización. Esto incluye la formulación de preguntas clave, restricciones y criterios de éxito del modelo.
+	\item \textbf{Comprensión de los datos:} Implica la recolección inicial de datos, su descripción mediante estadísticas básicas y la detección de problemas como valores atípicos, inconsistencias o ausencia de registros. Es un paso crucial para conocer el potencial informativo del conjunto de datos disponible.
+	\item \textbf{Preparación de los datos:} Consiste en seleccionar atributos relevantes, limpiar registros ruidosos, transformar formatos y generar nuevas variables si es necesario. Esta etapa puede involucrar la vectorización de texto, el escalado de variables o la codificación de categorías, especialmente en tareas como el procesamiento de lenguaje natural.
+	\item \textbf{Modelado:} Aquí se seleccionan y aplican los algoritmos de aprendizaje automático apropiados para el problema. En este paso también se realiza la validación cruzada, ajuste de hiperparámetros y experimentación con distintas configuraciones del modelo para maximizar su desempeño.
+	\item \textbf{Evaluación:} Los modelos construidos se evalúan en función de métricas objetivas como precisión, recall, F1-score o AUC. Además, se examina si los resultados cumplen con los objetivos definidos en la primera fase, considerando también interpretabilidad y robustez.
+	\item \textbf{Despliegue:} Finalmente, los conocimientos obtenidos se integran en sistemas de toma de decisiones, visualizaciones interactivas, aplicaciones o reportes. Esta fase puede incluir el monitoreo del modelo en producción y planes de mantenimiento o reentrenamiento periódico.
+\end{enumerate}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/02_crispdm_etapas.png}
+	\caption{Diagrama del proceso \textit{CRISP-DM}.}
+	\label{fig:crispdm}
+\end{figure}
+
+El carácter iterativo de \textit{CRISP-DM} permite realizar ajustes continuos en las decisiones tomadas durante el ciclo de vida del proyecto. Por ejemplo, si en la fase de evaluación se identifican problemas de rendimiento, es posible volver a las etapas de preparación de datos o modelado para realizar mejoras. Esta retroalimentación constante convierte a \textit{CRISP-DM} en una metodología altamente adaptable a proyectos con incertidumbre, cambios en los requerimientos o descubrimientos emergentes durante el análisis \parencite{wirth2000crisp}.
+
+\begin{tcolorbox}[title={Ejemplo aplicado: letras de canciones}]
+En un proyecto de clasificación automática de letras musicales, CRISP-DM permite estructurar el flujo desde la definición del objetivo (“determinar si una canción es premiada”), pasando por la exploración del dataset lírico, su limpieza (tokenización, eliminación de stopwords), aplicación de modelos como Naive Bayes o Regresión Logística, hasta la validación con métricas como F1-score y el posible despliegue en forma de dashboard.
+\end{tcolorbox}
+
+\subsection{División del Conjunto de Datos}
+
+Para evaluar de manera objetiva el rendimiento de los modelos, se dividió el conjunto de datos en tres subconjuntos funcionales: entrenamiento, validación y prueba, tal como se muestra en la Figura~\ref{fig:split_fases}. Esta división es una práctica común en proyectos de aprendizaje supervisado, ya que permite separar claramente las etapas de entrenamiento, ajuste y evaluación final del modelo.
+
+En nuestro caso, la partición se realizó en proporciones de \(75\%\) para entrenamiento, \(15\%\) para validación y \(15\%\) para prueba. Esta división se realizó de manera estratificada para preservar la proporción original entre canciones premiadas y no premiadas en cada subconjunto.
+
+\begin{itemize}
+    \item \textbf{Entrenamiento (Training)}: Se utiliza para ajustar los parámetros del modelo. Aquí es donde el modelo aprende patrones y relaciones a partir de los datos.
+    \item \textbf{Validación (Validation)}: Permite comparar distintos modelos o configuraciones y seleccionar la mejor alternativa. También ayuda a prevenir el sobreajuste al evaluar el rendimiento durante el desarrollo.
+    \item \textbf{Prueba (Test)}: Se emplea únicamente al final, para medir la capacidad real de generalización del modelo sobre datos no vistos previamente.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/02_split_datos_etiquetado.png}
+\caption{División del conjunto de datos y propósito de cada subconjunto.}
+\label{fig:split_fases}
+\end{figure}
+\subsection{Representación Vectorial de Texto: \textit{TF-IDF}}
+
+En procesamiento de lenguaje natural, es necesario transformar el texto en una forma que los algoritmos computacionales puedan interpretar. Para ello, se utilizan técnicas de representación vectorial, que convierten documentos en vectores numéricos. Una de las más conocidas y efectivas en tareas de clasificación es \textit{Term Frequency-Inverse Document Frequency} (\textit{TF-IDF})  \parencite{Manning2008}.
+
+\subsubsection{Introducción a la Representación Vectorial de Texto}
+
+Cada documento de un corpus se representa como un vector en un espacio de dimensiones correspondientes a términos (palabras). Esta representación permite aplicar técnicas matemáticas y estadísticas sobre los textos, como la clasificación supervisada o el análisis de similitud \parencite{Bird2009}.
+
+\subsubsection{Frecuencia de Término (TF) y Frecuencia Inversa de Documento (IDF)}
+
+- La frecuencia de término (TF) mide cuántas veces aparece una palabra en un documento.
+- La frecuencia inversa de documento (IDF) penaliza las palabras comunes y da mayor peso a las palabras que aparecen en pocos documentos.
+- El valor \textit{TF-IDF} se calcula como:
+\[
+	\text{TF-IDF}(t,d) = \text{TF}(t,d) \times \log\left(\frac{N}{\text{DF}(t)}\right)
+\]
+donde \(t\) es el término, \(d\) el documento, \(N\) el número total de documentos, y \(\text{DF}(t)\) el número de documentos que contienen el término.
+
+\subsubsection{Ventajas del \textit{TF-IDF} frente a Otras Técnicas de Vectorización}
+
+TF-IDF no requiere entrenamiento previo, es eficiente computacionalmente y produce resultados competitivos en muchas tareas de clasificación de texto. Aunque no capta relaciones semánticas profundas como modelos basados en embeddings (por ejemplo Word2Vec o BERT), su simplicidad y eficacia la hacen adecuada para proyectos de análisis textual con datasets moderados \parencite{Salton1988}.
+
+\subsubsection{Aplicación del \textit{TF-IDF} en Letras de Canciones}
+
+En el contexto de esta investigación, \textit{TF-IDF} se utiliza para identificar palabras representativas en letras de canciones en español. Esta técnica permite generar una representación estructurada del contenido lírico, resaltando los términos con mayor capacidad discriminativa entre canciones premiadas y no premiadas. Las palabras con \textit{TF-IDF} alto suelen ser aquellas que reflejan temas distintivos, emociones o estilos particulares de la obra analizada.
+
+\begin{table}[H]
+	\centering
+	\caption{Ejemplo de cálculo \textit{TF-IDF} en letras de canciones}
+	\begin{tabular}{|l|c|c|c|c|}
+		\hline
+		\textbf{Término} & \textbf{TF} & \textbf{DF} & \textbf{IDF} & \textbf{TF-IDF} \\
+		\hline
+		amor             & 4           & 50          & 1.0          & 4.0             \\
+		corazón          & 2           & 20          & 1.4          & 2.8             \\
+		vida             & 3           & 35          & 1.1          & 3.3             \\
+		luz              & 1           & 5           & 2.0          & 2.0             \\
+		despedida        & 1           & 3           & 2.3          & 2.3             \\
+		\hline
+	\end{tabular}
+	\label{tab:tfidf}
+\end{table}
+\section{Marco conceptual}
+
+\subsection{Contenido lingüístico}
+
+\subsubsection{Definición}
+El contenido lingüístico se refiere al conjunto de componentes léxicos y semánticos presentes en las letras de canciones, considerado la variable independiente de este estudio.
+
+\subsubsection{Niveles de análisis}
+
+Para caracterizar el contenido lingüístico de las letras de canciones se distinguen dos niveles complementarios:
+
+\begin{itemize}
+  \item \textbf{Nivel léxico}: evalúa atributos cuantitativos de las palabras, incluyendo  
+    \begin{itemize}
+      \item \emph{Frecuencia de término}: recuento de apariciones normalizado por longitud del texto.  
+      \item \emph{Riqueza léxica} (type–token ratio): proporción entre el número de palabras distintas y el total de tokens.  
+      \item \emph{N-gramas} (bigrams y trigrams): secuencias de dos o tres palabras contiguas para capturar combinaciones léxicas frecuentes.  
+    \end{itemize}
+
+  \item \textbf{Nivel semántico}: explora la dimensión de significado y emoción, considerando  
+    \begin{itemize}
+      \item \emph{Detección de temas}: identificación de tópicos líricos recurrentes (amor, protesta, celebración).  
+      \item \emph{Análisis de polaridad}: medida de carga afectiva (positiva, negativa o neutra) mediante diccionarios o modelos de sentimiento.  
+      \item \emph{Reconocimiento de entidades nombradas}: extracción de nombres propios, lugares y conceptos culturales que aportan contexto temático.  
+    \end{itemize}
+\end{itemize}
+
+\subsection{Conceptos metodológicos}
+
+\subsubsection{N-gramas}
+Secuencias contiguas de \(n\) tokens (palabras) que capturan patrones léxicos y expresiones idiomáticas en las letras de canciones. Este concepto se expone a detalle en la sección de Representación vectorial del Marco Teórico.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{images/02_n-gramas.png}
+  \caption{Ejemplo de n-gramas: unigrama, bigrama y trigrama en la frase “This is a sentence”.}
+  \label{fig:ngramas}
+\end{figure}
+
+\subsection{Lematización y su Importancia en Letras de Canciones}
+
+La lematización consiste en reducir una palabra a su forma base o lema, considerando su categoría gramatical y contexto. A diferencia del stemming, que simplemente recorta palabras, la lematización aplica reglas lingüísticas para mantener el significado. En el contexto musical, esta técnica permite unificar variantes verbales y estilísticas frecuentes en letras de canciones, mejorando así la calidad del análisis semántico y la eficiencia de los modelos de clasificación \parencite{Jurafsky2021}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{images/02_lematizacion_diagrama.png}
+	\caption{Lematización: variantes del verbo “cantar”}
+	\label{fig:lematizacion_diagrama}
+\end{figure}

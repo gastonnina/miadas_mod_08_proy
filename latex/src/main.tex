@@ -1,0 +1,159 @@
+\documentclass[11pt,oneside,letterpaper]{book}
+
+% ================= PREÁMBULO =================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[a4paper, left=3.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{tocloft}    % Para personalizar el índice
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{array}
+\usepackage{booktabs} % para tablas
+\renewcommand{\arraystretch}{1.5}
+%\usepackage{url}
+
+% Cambiar fuente y tamaño del título
+\usepackage{etoolbox}
+\patchcmd{\lstlistoflistings}
+  {\section*{\lstlistlistingname}}  % lo que hace por defecto
+  {\section*{\centering\large\bfseries \lstlistlistingname}} % lo que tú quieres
+  {}{}
+
+%\usepackage{hyperref}
+%\usepackage[hidelinks]{hyperref}  % Índice con links ocultos para el PDF final
+%\usepackage{xurl} % Mejora cortes automáticos en URLs largas
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue
+]{hyperref}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{orange},
+  breaklines=true,
+  frame=single,
+  columns=flexible,
+  keepspaces=true,
+}
+\lstdefinestyle{pythonStyle}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{orange},
+  commentstyle=\color{gray}\itshape,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=5pt,
+  backgroundcolor=\color{white},
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  captionpos=b
+}
+
+\lstset{style=pythonStyle}
+\renewcommand{\appendixname}{Anexo}
+
+\usepackage{float}
+\usepackage{amsmath,amssymb}
+
+\usepackage{mathptmx} % Usa Times New Roman como fuente principal
+
+\usepackage[most]{tcolorbox} % cuadros de colores
+
+% Bibliografía
+\usepackage{csquotes} % Recomendado por biblatex
+\usepackage[style=apa, backend=biber, citestyle=apa, language=spanish, url=true, doi=true, eprint=false]{biblatex}
+\addbibresource{referencias.bib}
+% Forzar formato de URL y DOI como clickeables
+%\DeclareFieldFormat{url}{\url{#1}}
+%\DeclareFieldFormat{doi}{\href{https://doi.org/#1}{https://doi.org/#1}}
+
+% Márgenes y espaciado según APA
+% APA: 1 pulgada = 25.4 mm (puedes dejar left=30mm si tu uni lo exige, si no, usa 25mm)
+\geometry{
+    letterpaper,
+    left=25mm,     % Cambia a 30mm solo si lo pide tu universidad para empastado
+    right=25mm,
+    top=25mm,
+    bottom=25mm,
+    headsep=10mm   % Espacio entre cabecera (paginación) y el texto
+}
+\setlength{\headheight}{15pt} % Altura del encabezado
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{1em}
+\onehalfspacing
+
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+% Ruta para imágenes
+\graphicspath{{images/}}
+
+% Mostrar "CAPÍTULO" en mayúsculas y números romanos para capítulos
+\renewcommand{\chaptername}{CAPÍTULO}
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+% Secciones numeradas como 1.1, 1.2, etc.
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+
+% Formato visual del título del capítulo
+\titleformat{\chapter}[block]
+  {\normalfont\bfseries\Large}
+  {CAPÍTULO \thechapter\-}{1em}{}
+
+% ========= Personalización del índice =========
+\renewcommand{\cftchappresnum}{CAPÍTULO }
+\renewcommand{\cftchapaftersnum}{\quad}
+\renewcommand{\cftchapnumwidth}{8em}
+
+% ========= Encabezado APA =========
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage} % Número de página en la parte superior derecha
+\renewcommand{\headrulewidth}{0pt} % Sin línea en el encabezado
+\renewcommand{\footrulewidth}{0pt} % Sin línea en el pie
+
+% Espaciado visual del título de capítulo
+\titlespacing*{\chapter}{0pt}{-30pt}{30pt} % Puedes ajustar -20pt a 0pt o mayor si el capítulo queda muy arriba
+
+% enumerar indice hasta 3 nivel
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% justificar
+\sloppy
+
+\renewcommand{\thechapter}{\arabic{chapter}}
+
+% ================= DOCUMENTO =================
+\begin{document}
+
+\include{0_cover}
+\pagenumbering{roman} % ← Numeración romana (i, ii, iii)
+\include{0_dedicatoria}
+\include{0_resumen}
+\include{0_indice}
+\include{1_marco_introductorio}
+\include{2_marco_teorico}
+\include{3_marco_aplicativo}
+\include{4_resultados}
+\include{5_conclusiones}
+\include{6_bibliografia}
+% \include{6_anexos}
+\end{document}

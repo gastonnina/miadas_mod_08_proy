@@ -1,0 +1,173 @@
+\newpage
+\thispagestyle{empty}
+\vspace*{0.35\textheight}
+\begin{center}
+	{\Huge\textbf{CAPÍTULO I}} \\[0.5cm]
+	{\Huge\textbf{MARCO INTRODUCTORIO}}
+\end{center}
+\newpage
+\thispagestyle{fancy}
+
+\newpage
+\pagenumbering{arabic}
+\section*{}
+\begin{center}
+	\Large \textbf{INTRODUCCIÓN}
+\end{center}
+
+Dummy text.
+
+\chapter{MARCO INTRODUCTORIO}
+
+\section{Antecedentes}
+
+Dummy text.
+
+
+
+\section{Planteamiento del problema}
+
+Dummy text.
+
+\section{Formulación del problema de investigación}
+
+\vspace{1em}
+\noindent
+\textit{¿Qué patrones lingüísticos diferencian las letras de canciones en español que han sido premiadas por la RIAA de aquellas que no han sido premiadas durante el período 1990--2022, y cómo pueden ser identificados mediante un modelo de clasificación supervisado?}
+\vspace{1em}
+
+\section{Delimitación}
+
+Dummy text.
+
+\section{Problemas específicos}
+
+Dummy text.
+
+\section{Objetivos de la investigación}
+    \subsection{Objetivo general}
+
+    \noindent
+    Dummy text.
+
+    \subsection{Objetivos específicos}
+
+    Dummy text.
+
+\section{Hipótesis}
+
+\noindent
+\textbf{Hipótesis principal:} \textit{Existen patrones lingüísticos diferenciables entre las letras de canciones en español que han sido premiadas por la RIAA y aquellas que no lo han sido, los cuales pueden ser identificados mediante un modelo de clasificación supervisado con un nivel de precisión estadísticamente significativo.}
+
+\subsection{Hipótesis específicas}
+
+Dummy text.
+
+\begin{enumerate}
+  \item \textbf{Corpus balanceado.}  
+  El corpus recolectado presentará una proporción 1:1 de canciones premiadas y no premiadas por la RIAA, manteniendo una distribución representativa de géneros musicales y periodos temporales (1990–2022).
+
+  \item \textbf{Preprocesamiento y vectorización.}  
+  El uso combinado de limpieza textual, normalización, eliminación de stopwords, lematización y extracción de n-gramas generará vectores TF-IDF con mayor capacidad discriminativa (medida en varianza explicada en un análisis de componentes principales) que una simple vectorización unigram.
+
+  \item \textbf{Comparación de modelos.}  
+  El modelo XGBoost alcanzará un F1-score significativamente superior (p < 0.05) al de Naive Bayes en el conjunto de prueba, demostrando la ventaja del boosting en datos textuales con desequilibrio de clases.
+
+  \item \textbf{Patrones lingüísticos.}  
+  Las variables afectivas (palabras con carga emocional) y los n-gramas de orden dos y tres serán los indicadores más influyentes para distinguir letras premiadas de no premiadas, según la importancia de características extraída de Random Forest y Regresión Logística.
+
+  \item \textbf{Visualización de resultados.}  
+  Las nubes de palabras y los mapas de calor mostrarán agrupaciones temáticas claramente diferenciadas entre canciones premiadas y no premiadas, facilitando la interpretación de los patrones lingüísticos identificados.
+\end{enumerate}
+
+\section{Justificación}
+
+\subsection{Justificación teórica}
+
+Dummy text.
+
+\subsection{Justificación práctica y social}
+
+Dummy text.
+
+\subsection{Justificación metodológica}
+
+Dummy text.
+
+\section{Alcances y limitaciones}
+
+\subsection{Alcances}
+
+Dummy text.
+
+\subsection{Limitaciones}
+
+Dummy text.
+
+
+\section{Resultados esperados}
+
+Dummy text.
+
+\section{Matriz de Consistencia}
+
+Dummy text.
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\begin{table}[H]
+\centering
+\caption{Matriz de Consistencia}
+\begin{tabularx}{\textwidth}{|Y|Y|Y|Y|}
+\hline
+\textbf{Problema} & \textbf{Objetivo} & \textbf{Hipótesis} & \textbf{Variables} \\
+\hline
+\textbf{General:} ¿Qué patrones lingüísticos diferencian las letras de canciones en español premiadas por la RIAA de aquellas que no han sido premiadas durante el período 1990--2022, y cómo pueden ser identificados mediante un modelo de clasificación supervisado?
+
+\vspace{0.3em}
+\textbf{Específicos:}
+\begin{enumerate}
+  \item ¿Cómo construir un corpus balanceado?
+  \item ¿Qué técnicas PLN son adecuadas?
+  \item ¿Qué modelos clasifican mejor?
+  \item ¿Qué características son más relevantes?
+  \item ¿Cómo representar visualmente los resultados?
+\end{enumerate}
+&
+
+\textbf{General:} Desarrollar un modelo de clasificación supervisado que permita identificar y analizar patrones lingüísticos característicos de las letras de canciones en español premiadas y no premiadas por la RIAA.
+
+\vspace{0.3em}
+\textbf{Específicos:}
+\begin{enumerate}
+  \item Recolectar un corpus balanceado
+  \item Preprocesar con técnicas de PLN
+  \item Entrenar y comparar modelos
+  \item Identificar características lingüísticas
+  \item Visualizar patrones relevantes
+\end{enumerate}
+&
+
+\textbf{General:} Existen patrones lingüísticos diferenciables entre letras premiadas y no premiadas que pueden ser detectados por un modelo con precisión significativa.
+
+\vspace{0.3em}
+\textbf{Específicas:}
+\begin{itemize}
+  \item El contenido lingüístico varía entre clases
+  \item Algunos modelos son más precisos
+  \item Las visualizaciones ayudan a interpretar resultados
+\end{itemize}
+&
+
+\textbf{Independiente:} Contenido lingüístico de las letras
+
+\vspace{0.3em}
+\textbf{Dependiente:} Éxito musical (premiación)
+
+\vspace{0.3em}
+\textbf{Auxiliares:} Desempeño del modelo, visualización e interpretabilidad
+\\
+\hline
+\end{tabularx}
+\label{tab:matriz_consistencia}
+\end{table}

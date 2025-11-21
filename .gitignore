@@ -12,3 +12,16 @@ __pycache__/
 # LaTeX build
 latex/build/
 survey_results_public.csv
+
+
+# LaTeX
+*.aux
+*.log
+*.toc
+*.out
+*.pdf
+*.blg
+*.bbl
+*.fdb_latexmk
+*.fls
+*.synctex.gz
