@@ -86,7 +86,7 @@
           <h3>Tipo de modelo</h3>
           <p><strong>Clasificación</strong></p>
           <h3>Pregunta de investigación</h3>
-          <p class="question-callout">¿Podemos predecir la adopción de IA en desarrolladores utilizando su perfil profesional y tecnológico en 2025?</p>
+          <p class="question-callout">¿Podemos predecir la adopción de IA en desarrolladores utilizando su perfil profesional y tecnológico en 2025 en un estudio global?</p>
         </section>
         <section data-menu-title="Criterio de éxito">
           <h3>Criterio de éxito</h3>
@@ -163,7 +163,7 @@
         </section>
         <section data-menu-title="Hipótesis">
           <h3>Hipótesis</h3>
-          <p>La experiencia y ciertos lenguajes/roles están positivamente asociados a la adopción de IA.</p>
+          <p>Un modelo predictivo permite identificar la tendencia de uso de IA en el desarrollo de software</p>
         </section>
       </section>
 
@@ -779,9 +779,196 @@
 
       </section>
 
-      <section data-menu-title="Optimización">
-        <h2>⚙️<br />- Sección 5 -<br />Optimización</h2>
+     <!-- SECCIÓN 5 – OPTIMIZACIÓN -->
+    <section data-menu-title="Optimización">
+      <!-- Portada de sección -->
+      <section>
+        <h2>⚙️<br />- Sección 5 -<br />Optimización del modelo</h2>
+        <p class="small">
+          Ajuste de hiperparámetros de Regresión Logística usando GridSearchCV y RandomizedSearchCV.
+        </p>
+
+        <aside class="notes">
+          Presento la parte final del flujo: una vez elegido el modelo ganador
+          (Regresión Logística sin balance), aplico optimización de hiperparámetros
+          para ver si es posible mejorar el F1-score y, sobre todo, el recall de la clase positiva.
+        </aside>
       </section>
+
+      <!-- Estrategia de optimización -->
+      <section data-menu-title="Estrategia de optimización">
+        <h3>Estrategia de optimización</h3>
+
+        <ul>
+          <li>Pipeline con <code>ColumnTransformer</code>:
+            <ul>
+              <li><code>OneHotEncoder</code> para variables categóricas</li>
+              <li><code>StandardScaler</code> para variables numéricas</li>
+            </ul>
+          </li>
+          <li>Clasificador final: <b>LogisticRegression</b></li>
+          <li><b>GridSearchCV</b> (k=5, scoring = F1 clase 1)</li>
+          <li><b>RandomizedSearchCV</b> para explorar C en rango continuo</li>
+        </ul>
+
+        <div style="margin-top:1.5rem;">
+          <p><b>Espacio de búsqueda (Grid):</b></p>
+          <ul>
+            <li>C ∈ {0.01, 0.1, 1, 10}</li>
+            <li>penalty ∈ {l1, l2}</li>
+            <li>solver = liblinear</li>
+          </ul>
+        </div>
+
+        <aside class="notes">
+          Aquí explico que la optimización se hace sobre el pipeline completo
+          (preprocesamiento + modelo), no sólo sobre los datos crudos.
+          Uso GridSearch para un barrido discreto y RandomizedSearch para confirmar
+          que no se está ignorando un valor de C mejor en un rango continuo.
+          Todo se evalúa con validación cruzada estratificada k=5 y F1 de la clase 1.
+        </aside>
+      </section>
+
+      <!-- Resultados numéricos -->
+      <section>
+        <h3>Resultados de la Optimización</h3>
+
+        <div style="
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 1rem;
+        ">
+          <table style="
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: center;
+          ">
+            <thead>
+              <tr style="border-bottom: 1px solid #666;">
+                <th style="padding: 8px;">Modelo</th>
+                <th style="padding: 8px;">C</th>
+                <th style="padding: 8px;">Penalty</th>
+                <th style="padding: 8px;">F1 (CV k=5)</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr style="border-bottom: 1px solid #333;">
+                <td style="padding: 8px;">LogReg baseline</td>
+                <td style="padding: 8px;">1.0</td>
+                <td style="padding: 8px;">l2</td>
+                <td style="padding: 8px;">≈ 0.881</td>
+              </tr>
+
+              <tr style="border-bottom: 1px solid #333;">
+                <td style="padding: 8px;">LogReg optimizada (GridSearch)</td>
+                <td style="padding: 8px;">0.01</td>
+                <td style="padding: 8px;">l2</td>
+                <td style="padding: 8px;">≈ 0.883</td>
+              </tr>
+
+              <tr>
+                <td style="padding: 8px;">LogReg optimizada (Randomized)</td>
+                <td style="padding: 8px;">≈ 0.0466</td>
+                <td style="padding: 8px;">l2</td>
+                <td style="padding: 8px;">≈ 0.883</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="notes">
+          Esta tabla compara los hiperparámetros y el F1 promedio obtenido
+          por cada enfoque de búsqueda. El modelo optimizado mejora ligeramente
+          el F1 y aumenta el recall, manteniendo buena interpretabilidad.
+        </aside>
+      </section>
+
+
+      <!-- Comparación en test + matriz de confusión -->
+      <section data-menu-title="Matriz de confusión comparada">
+        <h3>Matriz de confusión – Baseline vs Optimizada</h3>
+
+        <div style="display:flex; justify-content:center; margin-top:1rem;">
+          <img
+            src="assets/charts/04_confusion_matrices_logreg_optimization.png"
+            alt="Comparación de matrices de confusión para Logistic Regression baseline y optimizada"
+            style="
+              width: 90%;
+              max-width: 900px;
+              box-shadow: 0 0 18px rgba(0,0,0,0.45);
+              border-radius: 8px;
+            "
+          />
+        </div>
+
+        <p class="chart-caption">
+          La versión optimizada reduce drásticamente los <b>falsos negativos</b>
+          (de 105 a 17) a costa de aumentar ligeramente los <b>falsos positivos</b>
+          (de 1277 a 1376).
+        </p>
+
+        <aside class="notes">
+          Leo los valores de las matrices:
+          <ul>
+            <li><b>Baseline</b>:
+              <ul>
+                <li>TN = 115, FP = 1277</li>
+                <li>FN = 105, TP = 5116</li>
+              </ul>
+            </li>
+            <li><b>Optimizada</b>:
+              <ul>
+                <li>TN = 16, FP = 1376</li>
+                <li>FN = 17, TP = 5204</li>
+              </ul>
+            </li>
+          </ul>
+          Explico que:
+          <ul>
+            <li>El <b>recall</b> de la clase 1 mejora mucho: casi no dejamos
+                pasar usuarios de IA sin detectar (FN bajan de 105 a 17).</li>
+            <li>A cambio, cometemos algunos falsos positivos adicionales,
+                lo que reduce levemente la precisión y el AUC.</li>
+            <li>Este trade-off es razonable si el costo de no detectar
+                a un usuario de IA es más alto que el costo de etiquetar
+                algunos no-usuarios como usuarios.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <!-- Criterio de éxito -->
+      <section data-menu-title="Criterio de éxito">
+        <h3>¿Se cumplió el criterio de éxito?</h3>
+
+        <ul>
+          <li>Mejora en F1: de ≈0.8810 a ≈0.8820 (≈ +0.1%)</li>
+          <li>El instructivo pedía ≈ +5% de mejora</li>
+          <li><b>No</b> se alcanza el +5%, pero:
+            <ul>
+              <li>Se gana recall en la clase positiva</li>
+              <li>Se confirma que el baseline ya estaba casi en su máximo</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p class="chart-caption">
+          La optimización refina el modelo, pero no produce una mejora dramática:
+          la Regresión Logística ya era una buena solución con las variables actuales.
+        </p>
+
+        <aside class="notes">
+          Aquí cierro la sección diciendo explícitamente que el criterio de +5% no se cumple,
+          pero el proceso de optimización sigue siendo valioso porque:
+          • documenta el espacio de búsqueda,
+          • muestra que no hay ganancias grandes sin cambiar de modelo o agregar nuevas variables,
+          • y refuerza la elección de la Regresión Logística como modelo final
+            por su equilibrio entre rendimiento y explicabilidad.
+        </aside>
+      </section>
+    </section>
+
 
       <!-- Complementos -->
       <section data-menu-title="Limitaciones y ética">
