@@ -2,7 +2,7 @@
 \thispagestyle{empty}
 \vspace*{0.35\textheight}
 \begin{center}
-	{\Huge\textbf{CAPÍTULO IV}} \\[0.5cm]
+	{\Huge\textbf{CAPÍTULO VI}} \\[0.5cm]
 	{\Huge\textbf{CONCLUSIONES Y}}\\[0.5cm]
     {\Huge\textbf{RECOMENDACIONES}}
 \end{center}
@@ -12,18 +12,64 @@
 
 \section{Conclusiones}
 
-El presente trabajo demostró.
+El presente proyecto logró construir y evaluar un modelo supervisado capaz de predecir la adopción de herramientas de inteligencia artificial entre desarrolladores, utilizando datos de la encuesta global \textit{Stack Overflow Developer Survey 2025}. A través de un proceso metodológico completo —comprendiendo exploración, selección de variables, comparación de modelos y optimización— se obtuvieron resultados consistentes y alineados con el criterio de éxito definido en el Sprint.
 
-\section{Limitaciones del estudio}
+En primer lugar, el análisis exploratorio mostró que la adopción de IA no depende de un único factor dominante, sino de combinaciones de características profesionales, tecnológicas y contextuales. Variables como \textbf{DevType}, \textbf{Country}, \textbf{Industry} y \textbf{OrgSize} presentaron correlaciones moderadas con el uso de IA, mientras que \textbf{WorkExp} y \textbf{EdLevel} mostraron contribuciones más leves. Esta estructura multifactorial justificó el uso de un modelo supervisado capaz de manejar tanto variables categóricas como numéricas.
 
-Aunque
+La comparación de técnicas predictivas permitió evaluar el desempeño de \textbf{Regresión Logística} y \textbf{Random Forest} en versiones balanceadas y no balanceadas. Ambos modelos superaron el criterio de éxito (F1 $\geq 0.80$), pero la \textbf{Regresión Logística sin balance} destacó por su rendimiento competitivo (F1 $\approx0.8817$), su baja variabilidad entre folds (0.0015) y su interpretabilidad, factores clave para análisis explicativos y toma de decisiones.
 
-\section{Recomendaciones}
+El proceso de optimización confirmó que el modelo baseline ya capturaba la mayor parte de la estructura del problema. La búsqueda exhaustiva con \textit{GridSearchCV} y la búsqueda aleatoria con \textit{RandomizedSearchCV} convergieron en hiperparámetros similares, alcanzando un F1 promedio de $\approx0.883$. Si bien la mejora respecto al modelo base fue modesta, el ajuste refinó significativamente el \textbf{recall} de la clase positiva, reduciendo falsos negativos de forma sustancial (105→17), lo que resulta valioso para escenarios donde omitir usuarios de IA representa un mayor riesgo que clasificarlos erróneamente como tales.
 
-\subsection{Posibles mejoras al modelo}
+En términos generales, el modelo final ofrece un equilibrio adecuado entre rendimiento, estabilidad, eficiencia computacional y capacidad de interpretación. No obstante, persisten limitaciones propias del dataset, como la naturaleza autodeclarada de la encuesta y la variabilidad cultural asociada a los países participantes. Asimismo, el AUC moderado ($\approx0.67$) indica que aún existe superposición entre clases, lo que podría explorarse en trabajos futuros mediante modelos más complejos o nuevas fuentes de información.
 
-Dummy text.
+En síntesis, se concluye que la \textbf{Regresión Logística optimizada} constituye una solución sólida y confiable para predecir la adopción de IA con las variables disponibles. El modelo proporciona insights relevantes para comprender qué perfiles profesionales, regiones e industrias presentan mayor propensión a integrar herramientas de IA, lo cual puede orientar estrategias de formación, políticas de talento y decisiones organizacionales en un contexto tecnológico en rápida evolución.
 
-\subsection{Líneas de trabajo futuro}
+\section{Limitaciones}
 
-Dummy text.
+A pesar de los resultados obtenidos, el presente estudio presenta varias limitaciones que deben considerarse al interpretar las conclusiones:
+
+\begin{itemize}
+    \item \textbf{Naturaleza autodeclarada del dataset.} La encuesta Stack Overflow 2025 se basa en respuestas voluntarias, lo que introduce sesgos de percepción, autoselección y representatividad desigual entre países.
+
+    \item \textbf{Variables limitadas respecto al dataset original.} El análisis utilizó un subconjunto reducido de variables, lo que puede omitir factores relevantes asociados al uso de IA (por ejemplo, exposición a herramientas específicas, motivaciones personales o cultura organizacional).
+
+    \item \textbf{Correlaciones bajas entre predictores y la variable objetivo.} La mayoría de las asociaciones cuantitativas fueron débiles, lo que reduce la capacidad teórica de separación entre clases y explica el AUC moderado ($\approx 0.67$).
+
+    \item \textbf{Posible ruido en variables categóricas de alta cardinalidad.} Categorías como \textit{DevType} o \textit{Country} pueden presentar ruido semántico o dispersión significativa, afectando la estabilidad del modelo.
+
+    \item \textbf{Ausencia de análisis temporal.} El estudio es transversal y no permite evaluar la evolución del uso de IA a lo largo del tiempo.
+\end{itemize}
+
+Estas limitaciones no invalidan los resultados, pero sí sugieren cautela al generalizar los hallazgos y señalan oportunidades para mejorar el modelo en trabajos futuros.
+
+\section{Recomendaciones y Trabajo Futuro}
+
+Con base en los resultados del modelo final y en las limitaciones identificadas, se proponen las siguientes recomendaciones para estudios posteriores y aplicaciones prácticas:
+
+\subsection*{Recomendaciones para organizaciones o tomadores de decisiones}
+
+\begin{itemize}
+    \item \textbf{Enfocar programas de formación en perfiles técnicos clave.} Roles como científicos de datos, ingenieros de software y desarrolladores especializados muestran mayor propensión a adoptar IA; fortalecer su capacitación puede acelerar procesos de innovación.
+
+    \item \textbf{Priorizar estrategias de adopción según industria y región.} Sectores como software, telecomunicaciones y fintech presentan mayor afinidad con herramientas de IA, mientras que otros requieren políticas más específicas.
+
+    \item \textbf{Utilizar modelos explicables para toma de decisiones.} La Regresión Logística permite identificar qué factores influyen en la adopción, facilitando planes de formación y políticas organizacionales basadas en evidencia.
+\end{itemize}
+
+\subsection*{Trabajo futuro}
+
+\begin{itemize}
+    \item \textbf{Incorporar nuevas variables del dataset completo}, como tecnologías específicas utilizadas, tipo de proyecto, motivaciones personales y nivel de exposición a IA.
+
+    \item \textbf{Evaluar modelos más complejos}, tales como XGBoost, LightGBM o redes neuronales, para explorar si pueden mejorar el AUC y la capacidad de discriminación.
+
+    \item \textbf{Experimentar con métodos de \textit{feature engineering}}: extracción de tópicos en descripciones, codificación semántica de roles o embeddings de países e industrias.
+
+    \item \textbf{Realizar análisis temporal} con ediciones anteriores y futuras de la encuesta para identificar tendencias en adopción de IA a lo largo del tiempo.
+
+    \item \textbf{Explorar técnicas de calibración de probabilidades}, como Platt scaling o isotonic regression, para mejorar la interpretación probabilística del modelo.
+
+    \item \textbf{Implementar el modelo en un entorno productivo} (API o dashboard) para monitorear la adopción de IA en diversas poblaciones o empresas.
+\end{itemize}
+
+Estas recomendaciones buscan fortalecer la capacidad predictiva del modelo y ampliar su aplicación práctica en contextos reales de toma de decisiones.

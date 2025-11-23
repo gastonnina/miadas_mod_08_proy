@@ -1,0 +1,139 @@
+\newpage
+\thispagestyle{empty}
+\vspace*{0.35\textheight}
+\begin{center}
+	{\Huge\textbf{CAPÍTULO IV}} \\[0.5cm]
+	{\Huge\textbf{ANÁLISIS EXPLORATORIO DE DATOS}}
+\end{center}
+
+\newpage
+\chapter{ANÁLISIS EXPLORATORIO DE DATOS (EDA)}
+
+El análisis exploratorio de datos (EDA) tiene como objetivo identificar patrones, tendencias y relaciones entre las variables predictoras y la variable objetivo \texttt{AI\_Usage}. 
+
+Este capítulo se organiza en tres partes:
+(1) análisis bivariado,
+(2) matriz de correlación mixta, y
+(3) descripción de la naturaleza de los campos del dataset limpio.
+
+
+\section{Análisis Bivariado}
+
+Las siguientes visualizaciones muestran cómo se comportan las variables predictoras en relación con la variable objetivo \texttt{AI\_Usage}. Todas las figuras provienen del dataset ya procesado y limpio.
+
+\subsection{Uso de IA según experiencia laboral (\texttt{WorkExp})}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/03_eda_1_workexp.png}
+\caption{Distribución de años de experiencia según uso de IA.}
+\label{fig:eda_workexp}
+\end{figure}
+
+La mediana de experiencia laboral es similar entre usuarios y no usuarios de IA.  Sin embargo, se observan \textit{outliers} de alta experiencia dentro del grupo que sí utiliza IA, lo cual sugiere que ciertos perfiles muy senior adoptan herramientas de IA con mayor frecuencia.
+
+\subsection{Uso de IA según número de lenguajes dominados (\texttt{NumLanguages})}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/03_eda_2_numlanguages.png}
+\caption{Distribución del número de lenguajes según uso de IA.}
+\label{fig:eda_numlanguages}
+\end{figure}
+
+Ambos grupos presentan distribuciones similares, aunque los usuarios de IA muestran  una ligera tendencia a manejar un mayor número de lenguajes, indicando mayor  diversidad tecnológica.
+
+\subsection{Adopción de IA por país (\texttt{Country})}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/03_eda_3_country.png}
+\caption{Mapa mundial de usuarios de IA.}
+\label{fig:eda_country}
+\end{figure}
+
+La adopción de IA se concentra en polos tecnológicos globales como Estados Unidos, India, Reino Unido y Alemania. Este patrón sugiere que el contexto regional influye en la probabilidad de utilizar herramientas de IA.
+
+\subsection{Uso de IA por industria (\texttt{Industry})}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/03_eda_4_industry.png}
+\caption{Proporción de uso de IA por industria (Top 15).}
+\label{fig:eda_industry}
+\end{figure}
+
+Las industrias tecnológicas (como software, fintech, telecomunicaciones e IT services) muestran los niveles más altos de adopción de IA. Sectores tradicionales como gobierno o educación muestran menor proporción relativa.
+
+\subsection{Uso de IA por nivel educativo (\texttt{EdLevel})}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/03_eda_5_edlevel.png}
+\caption{Proporción de uso de IA según nivel educativo.}
+\label{fig:eda_edlevel}
+\end{figure}
+
+La adopción de IA aumenta entre quienes poseen formación universitaria, posgrado o grados profesionales. También se observa uso moderado entre perfiles técnicos y de
+estudios incompletos.
+
+\section{Matriz de Correlación Mixta}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/03_mixed_correlation_matrix.png}
+\caption{Matriz de correlación mixta (numéricas y categóricas).}
+\label{fig:correlacion_mixta}
+\end{figure}
+
+La matriz combina:
+\begin{itemize}
+    \item Pearson para variables numéricas.
+    \item Cramér's V para variables categóricas.
+    \item Correlación biserial para la variable objetivo binaria.
+\end{itemize}
+
+Los valores revelan que:
+
+\begin{itemize}
+    \item La correlación directa con \texttt{AI\_Usage} es baja en todas las variables, lo cual es habitual en datasets de comportamiento humano.
+    \item Destacan como predictoras relevantes: \texttt{DevType} (0.19), \texttt{Country} (0.17), \texttt{Industry} (0.12) y \texttt{OrgSize} (0.09).
+    \item Las asociaciones entre categóricas (\texttt{RemoteWork}, \texttt{Industry}, \texttt{OrgSize}) muestran patrones contextuales importantes.
+\end{itemize}
+
+Aunque las correlaciones no son fuertes, sí revelan señales relevantes para un modelo predictivo, especialmente para algoritmos no lineales como Random Forest.
+
+\section{Naturaleza de los Campos del Dataset Limpio}
+
+La Tabla \ref{tab:metadata_dataset} resume la naturaleza de cada campo utilizado en el análisis y posterior modelamiento.
+
+\begin{table}[H]
+\centering
+\caption{Metadatos del dataset limpio}
+\label{tab:metadata_dataset}
+\begin{tabular}{p{3.5cm} p{4cm} p{7cm}}
+\toprule
+\textbf{Columna} & \textbf{Tipo (pandas)} & \textbf{Naturaleza} \\
+\midrule
+DevType & category & Categórica nominal (rol profesional). \\
+WorkExp & float64 & Numérica continua (años de experiencia). \\
+Country & category & Categórica nominal (país). \\
+RemoteWork & category & Categórica ordinal (grado de trabajo remoto). \\
+Industry & category & Categórica nominal (sector/industria). \\
+OrgSize & category & Categórica ordinal (rango de tamaño de empresa). \\
+EdLevel & category & Categórica ordinal (nivel educativo). \\
+AI\_Usage & int64 & Binaria (variable objetivo: 0/1). \\
+NumLanguages & int64 & Numérica discreta (conteo de lenguajes). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Síntesis del EDA}
+
+\begin{itemize}
+    \item El uso de IA muestra patrones claros asociados al tipo de rol, industria, país y nivel educativo.
+    \item No existe una correlación lineal fuerte con ninguna variable individual, lo que sugiere que el fenómeno es multifactorial.
+    \item El comportamiento de las variables respalda el uso de modelos de clasificación capaces de capturar relaciones no lineales.
+\end{itemize}
+
+En conjunto, el EDA proporciona la base analítica necesaria para proceder con la etapa de modelamiento presentada en el siguiente capítulo.

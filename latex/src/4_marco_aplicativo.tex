@@ -1,0 +1,390 @@
+\newpage
+\thispagestyle{empty}
+\vspace*{0.35\textheight}
+\begin{center}
+	{\Huge\textbf{CAPÍTULO V}} \\[0.5cm]
+    {\Huge\textbf{MODELAMIENTO Y EVALUACIÓN DE MODELOS}}
+\end{center}
+
+\newpage
+\chapter{MODELAMIENTO Y EVALUACIÓN DE MODELOS}
+
+El objetivo del modelamiento es predecir la probabilidad de que un desarrollador utilice herramientas de inteligencia artificial (\texttt{AI\_Usage = 1}) a partir de variables demográficas, profesionales y tecnológicas. Para ello se emplean técnicas de clasificación supervisada  junto con un pipeline de preprocesamiento adecuado para datos mixtos (categóricos y numéricos).
+
+\section{Tipo de Problema}
+
+\begin{itemize}
+    \item \textbf{Tipo de análisis:} Clasificación supervisada.
+    \item \textbf{Objetivo:} Predecir si un desarrollador adopta IA.
+    \item \textbf{Variable objetivo:} \texttt{AI\_Usage} (0 = no usa IA, 1 = usa IA).
+    \item \textbf{Naturaleza de los datos:} Mezcla de variables categóricas (DevType, Country, EdLevel, Industry, RemoteWork, OrgSize) y numéricas (WorkExp, NumLanguages).
+    \item \textbf{Métricas de evaluación:} Accuracy, Precision, Recall, F1-score \parencite{powers2020evaluation} y ROC-AUC.
+\end{itemize}
+
+
+\section{Justificación de los Modelos}
+
+Se seleccionaron dos algoritmos complementarios para realizar el modelamiento:
+
+\subsection{Regresión Logística}
+\begin{itemize}
+    \item Modelo interpretable.
+    \item Sirve como \textit{baseline} sólido.
+    \item Rápido y estable.
+    \item Permite explicar factores de adopción de IA.
+\end{itemize}
+
+\subsection{Random Forest}
+\begin{itemize}
+    \item Captura relaciones no lineales.
+    \item Robusto frente a ruido y \textit{outliers}.
+    \item Mejor rendimiento en estructuras complejas.
+    \item Aporta una perspectiva complementaria al modelo lineal.
+\end{itemize}
+
+\section{Funciones Matemáticas de los Modelos}
+
+
+\subsection{Regresión Logística}
+
+La regresión logística estima la probabilidad \parencite{hosmer2013applied} de que un desarrollador use IA dada una combinación lineal de variables predictoras:
+
+\[
+P(Y = 1 \mid X) = \sigma(\beta_0 + \beta_1 x_1 + \dots + \beta_n x_n)
+\]
+
+donde:
+
+\begin{itemize}
+    \item $\sigma(z) = \frac{1}{1 + e^{-z}}$ es la función sigmoide \parencite{hosmer2013applied}.
+    \item $P(Y=1|X)$ es la probabilidad estimada de uso de IA.
+\end{itemize}
+
+
+\subsection{Random Forest}
+
+Random Forest consiste en un conjunto de árboles de decisión entrenados sobre subconjuntos aleatorios de datos y variables para reducir la varianza del modelo \parencite{breiman2001random}
+
+\[
+\hat{y} = \text{modo}\big(f_1(X), f_2(X), \dots, f_T(X)\big)
+\]
+
+donde $f_t$ representa el árbol número $t$ del bosque.
+
+\section{Pipeline de Preprocesamiento}
+
+El pipeline incluyó:
+
+\begin{itemize}
+    \item Imputación de valores numéricos (\textit{mediana}).
+    \item Imputación de valores categóricos (categoría: ``No especificado'').
+    \item Estandarización de variables numéricas (\textit{StandardScaler}).
+    \item Codificación de variables categóricas (\textit{One-Hot Encoding}).
+\end{itemize}
+
+Este pipeline se integró directamente con los modelos mediante \texttt{ColumnTransformer} y \texttt{Pipeline} de \textit{scikit-learn}.
+
+\section{Hiperparámetros Utilizados}
+
+\subsection{Regresión Logística}
+\begin{itemize}
+    \item \textbf{solver:} liblinear
+    \item \textbf{penalty:} l2
+    \item \textbf{class\_weight:} None y ``balanced''
+\end{itemize}
+
+\subsection{Random Forest}
+\begin{itemize}
+    \item \textbf{n\_estimators:} 200
+    \item \textbf{max\_depth:} None
+    \item \textbf{class\_weight:} None y ``balanced''
+    \item \textbf{criterion:} gini
+\end{itemize}
+
+\section{Resultados de los Modelos}
+
+A continuación se muestran las métricas obtenidas para los modelos principales y sus variantes con y sin balanceo de clases.
+
+\begin{table}[H]
+\centering
+\caption{Resultados de modelos principales y competidores}
+\label{tab:resultados_modelos}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Modelo} & \textbf{Accuracy} & \textbf{Precision (1)} & \textbf{Recall (1)} & \textbf{F1-score (1)} \\
+\midrule
+Random Forest (sin balance) & 0.790262 & 0.794018 & 0.991572 & 0.881867 \\
+Logistic Regression (sin balance) & 0.790866 & 0.800125 & 0.979889 & 0.88093 \\
+Random Forest (balanceado) & 0.788749 & 0.794516 & 0.987933 & 0.880731 \\
+Logistic Regression (balanceado) & 0.674883 & 0.8456 & 0.719594 & 0.777525 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Los mejores resultados se obtienen con \textbf{Random Forest (sin balance)} y \textbf{Logistic Regression (sin balance)}, con F1-score $\approx 0.88$.
+
+\section{Comparación Visual de Métricas}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{images/04_metricas_plotly.png}
+\caption{Comparación de métricas entre modelos.}
+\label{fig:metricas_modelos}
+\end{figure}
+
+La Figura \ref{fig:metricas_modelos} muestra una comparación directa entre los modelos evaluados considerando las métricas más relevantes para el problema: Accuracy, Precision, Recall, F1-score y ROC-AUC. En general, ambos modelos sin balancear (Regresión Logística y Random Forest) presentan un comportamiento muy similar y consistentemente superior a sus versiones balanceadas.
+
+En \textbf{Precision} y \textbf{Recall} se observa el patrón más marcado: Random Forest alcanza el mayor Recall ($\approx 0.99$), lo que indica que es el modelo que mejor identifica a los usuarios de IA (clase 1). Por su parte, la Regresión Logística obtiene una Precision ligeramente mayor, indicando menos falsos positivos.
+
+El \textbf{F1-score}, métrica clave debido al leve desbalance de clases, muestra valores muy similares entre ambos modelos ($\approx 0.88$), confirmando que ambos lograron un equilibrio sólido entre Precision y Recall. Finalmente, el \textbf{ROC-AUC} revela un rendimiento moderado entre  0.65 y 0.67, lo cual es consistente con problemas donde las relaciones predictoras son  débiles o dispersas.
+
+En conjunto, los resultados sugieren que ninguno de los dos modelos domina completamente: Random Forest destaca en Recall mientras que Regresión Logística muestra mejor estabilidad y menor variabilidad, lo que motiva su selección final como modelo ganador.
+
+
+\section{Matrices de Confusión}
+
+\subsection{Logistic Regression (sin balance)}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{images/04_cm_logreg_sinbalance.png}
+\caption{Matriz de confusión - Regresión Logística (sin balance).}
+\end{figure}
+
+La matriz de confusión indica que la Regresión Logística identifica correctamente a la gran mayoría de los usuarios de IA (clase 1), pero presenta errores considerables al identificar casos de la clase 0. Esto sugiere una ligera inclinación del modelo hacia la clase mayoritaria, lo cual es  coherente con la distribución del dataset. Aun así, el desempeño global es consistente y estable.
+
+
+\subsection{Random Forest (sin balance)}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{images/04_cm_rf_sinbalance.png}
+\caption{Matriz de confusión - Random Forest (sin balance).}
+\end{figure}
+
+Random Forest mejora la detección de la clase 0, reduciendo significativamente los falsos negativos comparado con la Regresión Logística. Mantiene también un desempeño muy alto  en la identificación de usuarios de IA (clase 1), posicionándose como un modelo robusto en  ambas clases. Su fortaleza principal es la captura de patrones no lineales.
+
+
+\section{Curvas ROC Comparadas}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{images/04_roc_comparadas.png}
+\caption{Curvas ROC comparadas entre modelos.}
+\label{fig:roc_curves}
+\end{figure}
+
+Las curvas ROC de ambos modelos muestran un comportamiento muy similar, con áreas bajo la curva (AUC) entre 0.65 y 0.67. Estos valores indican una capacidad de discriminación moderada, propia de problemas donde las señales predictoras son sutiles y no existe un único factor dominante. La cercanía entre modelos refuerza la conclusión de que ambos algoritmos capturan información comparable sobre la variable objetivo.
+
+
+\section{Validación Cruzada Estratificada (k=5)}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{images/04_cv_results.png}
+\caption{Validación cruzada estratificada k=5.}
+\label{fig:cv_k5}
+\end{figure}
+
+La validación cruzada estratificada con k=5 revela que la Regresión Logística sin balance obtiene el mejor F1-score promedio (0.8817) y, crucialmente, la menor desviación estándar. Esta baja variabilidad indica que el modelo es estable y mantiene un rendimiento consistente a lo largo de distintos subconjuntos de datos. Random Forest obtiene un F1 cercano, pero con mayor variabilidad, lo que sugiere menor estabilidad.
+
+
+
+\section{Selección del Modelo Ganador Según Criterio Preciso}
+
+El Sprint exige seleccionar el modelo ganador usando un criterio cuantitativo.  
+Se utiliza F1-score debido al leve desbalance de clases.
+
+\begin{table}[H]
+\centering
+\caption{Comparación según criterio preciso (F1-score con CV k=5)}
+\label{tab:criterio_preciso}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Modelo} & \textbf{F1 (CV k=5)} & \textbf{Std} \\
+\midrule
+Logistic Regression (sin balance) & \textbf{0.8817} & 0.0015 \\
+Random Forest (sin balance) & 0.8752 & 0.0023 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El modelo seleccionado como \textbf{ganador} es \textbf{Logistic Regression (sin balance)}, al lograr el mejor F1 promedio y menor variabilidad.
+
+\subsection{Objetivo de la Optimización}
+
+El modelo base de Regresión Logística ya mostraba un desempeño competitivo, con un
+\textit{F1-score} promedio cercano a $0{,}88$ en validación cruzada estratificada (\(k=5\)).
+El objetivo de la optimización fue:
+
+\begin{itemize}
+  \item Explorar combinaciones de hiperparámetros que pudieran mejorar el
+        \textit{F1-score} de la clase positiva (\texttt{AI\_Usage = 1}).
+  \item Verificar si era posible alcanzar una mejora sustancial (idealmente del orden de
+        un $5\%$ en la métrica principal), como sugiere el criterio de éxito del módulo.
+  \item Mantener la simplicidad e interpretabilidad del modelo para su uso posterior en
+        la toma de decisiones.
+\end{itemize}
+
+\subsection{Estrategia de Búsqueda de Hiperparámetros}
+
+La optimización se realizó construyendo un \textit{pipeline} en \texttt{scikit-learn} que
+incluye:
+
+\begin{itemize}
+  \item Un \textbf{preprocesamiento} mediante \texttt{ColumnTransformer}, con:
+        \begin{itemize}
+          \item \texttt{OneHotEncoder} para variables categóricas.
+          \item \texttt{StandardScaler} para variables numéricas.
+        \end{itemize}
+  \item Un clasificador de \textbf{Regresión Logística} como etapa final del pipeline.
+\end{itemize}
+
+Sobre este pipeline se aplicó una búsqueda en malla (\texttt{GridSearchCV}) \parencite{bergstra2012random} utilizando
+validación cruzada estratificada (\(k=5\)) y \texttt{f1} como métrica principal. El espacio de
+búsqueda se definió de la siguiente manera:
+
+\begin{table}[H]
+\centering
+\caption{Espacio de búsqueda para la Regresión Logística.}
+\label{tab:logreg_param_grid}
+\begin{tabular}{ll}
+\toprule
+\textbf{Hiperparámetro} & \textbf{Valores explorados} \\
+\midrule
+\texttt{C}        & \{0.01, 0.1, 1, 10\} \\
+\texttt{penalty}  & \{\texttt{l1}, \texttt{l2}\} \\
+\texttt{solver}   & \{\texttt{liblinear}\} \\
+\texttt{cv}       & Validación cruzada estratificada, $k=5$ \\
+\texttt{scoring}  & \texttt{f1} (clase positiva \texttt{AI\_Usage = 1}) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Adicionalmente, se ejecutó una búsqueda aleatoria (\texttt{RandomizedSearchCV}) con una
+distribución continua para \texttt{C}:
+
+\[
+C \sim \text{loguniform}(10^{-3}, 10^{2}),
+\]
+
+manteniendo \texttt{penalty} en \{\texttt{l1}, \texttt{l2}\} y \texttt{solver} = \texttt{liblinear}.
+El objetivo de esta búsqueda aleatoria fue confirmar que el espacio discreto de la malla
+no estaba ignorando valores de \texttt{C} potencialmente mejores.
+
+\subsection{Resultados de la Optimización}
+
+La búsqueda en malla (\texttt{GridSearchCV}) encontró la siguiente combinación óptima de
+hiperparámetros:
+
+\begin{itemize}
+  \item \texttt{penalty} = \texttt{l2}
+  \item \texttt{C} = 0.01
+  \item \texttt{solver} = \texttt{liblinear}
+\end{itemize}
+
+Con esta configuración, el \textit{F1-score} promedio en validación cruzada estratificada fue
+aproximadamente $0{,}883$. La búsqueda aleatoria (\texttt{RandomizedSearchCV}) obtuvo
+un valor muy similar de \textit{F1-score} promedio (también alrededor de $0{,}883$), con un
+valor de \(C \approx 0{,}0466\). Dado que las diferencias eran marginales y el modelo de
+\texttt{GridSearchCV} usa un valor más sencillo de interpretar (\(C = 0{,}01\)), se decidió
+adoptar este último como modelo optimizado.
+
+En el conjunto de prueba hold-out, el desempeño antes y después de la optimización fue el
+siguiente:
+
+\begin{table}[H]
+\centering
+\caption{Comparación del desempeño antes y después de la optimización (conjunto de prueba).}
+\label{tab:logreg_optimization_metrics}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Métrica} & \textbf{Baseline} & \textbf{LogReg optimizada} \\
+\midrule
+Exactitud        & $0{,}7910$ & $0{,}7894$ \\
+Precisión (clase 1) & $0{,}8003$ & $0{,}7909$ \\
+Recall (clase 1)    & $0{,}9799$ & $\mathbf{0{,}9967}$ \\
+F1 (clase 1)        & $0{,}8810$ & $\mathbf{0{,}8820}$ \\
+ROC AUC             & $\mathbf{0{,}6733}$ & $0{,}6643$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Se observa que:
+
+\begin{itemize}
+  \item El \textbf{recall} de la clase positiva aumenta de $0{,}9799$ a $0{,}9967$, es decir,
+        el modelo optimizado prácticamente detecta a todos los desarrolladores que usan IA.
+  \item El \textbf{\textit{F1-score}} de la clase positiva mejora ligeramente, de $0{,}8810$ a
+        $0{,}8820$, lo que indica un balance marginalmente mejor entre precisión y recall.
+  \item La \textbf{precisión} y el \textbf{ROC AUC} presentan una ligera disminución,
+        coherente con un modelo que se vuelve más ``sensible'' (mayor recall) a costa de
+        marcar más casos positivos.
+\end{itemize}
+
+Desde la perspectiva de negocio, este comportamiento puede ser deseable si el costo de
+\textit{falsos negativos} (no identificar a un desarrollador que utiliza IA) es mayor que el costo
+de algunos \textit{falsos positivos} adicionales.
+
+Opcionalmente, la comparación antes y después de la optimización se refuerza con una
+matriz de confusión doble (baseline vs. modelo optimizado), como se ilustra en la
+Figura~\ref{fig:cm_logreg_optimization}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/04_confusion_matrices_logreg_optimization.png}
+\caption{Matriz de confusión antes y después de la optimización de la Regresión Logística.}
+\label{fig:cm_logreg_optimization}
+\end{figure}
+
+En dicha figura se aprecia una reducción de los falsos negativos en la clase positiva tras la
+optimización, consistente con el aumento en el recall.
+
+\subsection{Criterios Cuantitativos y Cualitativos}
+
+Además del criterio preciso basado en \textit{F1-score}, se evaluaron criterios considerados
+``inadecuados'' en el sentido del instructivo, es decir, aspectos no estrictamente
+cuantitativos pero relevantes para la toma de decisiones:
+
+\begin{itemize}
+  \item \textbf{Interpretabilidad}: la Regresión Logística permite analizar la contribución
+        relativa de cada predictor mediante sus coeficientes, lo que facilita explicar el
+        modelo a perfiles no técnicos (gestores, responsables de formación, etc.).
+  \item \textbf{Costo computacional}: el tiempo de entrenamiento e inferencia es muy
+        reducido, lo que facilita su implementación en entornos productivos con grandes
+        volúmenes de encuestas.
+  \item \textbf{Escalabilidad}: el pipeline basado en \texttt{scikit-learn} se integra
+        fácilmente con flujos de trabajo en Python y puede reentrenarse con nuevas
+        versiones de la encuesta sin cambios estructurales.
+\end{itemize}
+
+Estos criterios refuerzan la elección de la Regresión Logística como modelo de referencia,
+incluso frente a alternativas más complejas como Random Forest, cuya ganancia en
+rendimiento no compensa la pérdida de transparencia.
+
+\subsection{Validación Final y Criterio de Éxito}
+
+Siguiendo el instructivo del proyecto, el criterio deseable era alcanzar una mejora de al menos
+un $5\%$ en la métrica principal. En este caso, la optimización produjo una mejora moderada
+(en el orden de décimas de punto porcentual en el \textit{F1-score}), por lo que \textbf{no se
+alcanza el umbral del $5\%$}. 
+
+Este resultado sugiere que el modelo base ya capturaba la mayor parte de la información
+disponible en las variables seleccionadas y que existen rendimientos decrecientes al intentar
+mejorar aún más el desempeño utilizando el mismo conjunto de variables y la misma familia
+de modelos.
+
+Aun así, el proceso de optimización resulta valioso porque:
+
+\begin{itemize}
+  \item Documenta de manera explícita el espacio de búsqueda y los hiperparámetros
+        probados.
+  \item Muestra que no existen ganancias significativas adicionales sin introducir
+        modelos más complejos o nuevas variables.
+  \item Confirma la Regresión Logística optimizada como un modelo que equilibra
+        adecuadamente rendimiento, estabilidad, simplicidad e interpretabilidad.
+\end{itemize}
+
+En consecuencia, la Regresión Logística optimizada se adopta como \textit{modelo final} para
+responder a la pregunta de investigación: predecir si un desarrollador utiliza o no herramientas
+de IA a partir de su perfil técnico y demográfico.

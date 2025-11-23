@@ -15,159 +15,259 @@
 	\Large \textbf{INTRODUCCIÓN}
 \end{center}
 
-Dummy text.
+En los últimos años, la adopción de herramientas de Inteligencia Artificial (IA) en el  ámbito del desarrollo de software ha experimentado un crecimiento acelerado. La aparición de modelos generativos, asistentes de código y plataformas de automatización ha  transformado las dinámicas de trabajo de los desarrolladores, influyendo en productividad, competencias técnicas y procesos de toma de decisiones dentro de las organizaciones  tecnológicas.
+
+El dataset \textit{Stack Overflow Annual Developer Survey 2025} constituye una de las  fuentes más completas y actuales sobre el perfil profesional, tecnológico y educativo de  desarrolladores a nivel global. Este conjunto de datos permite explorar de manera cuantitativa  los factores asociados a la adopción de herramientas de IA y genera un marco idóneo para  construir modelos predictivos basados en aprendizaje automático.
+
+El propósito general de este estudio es desarrollar un modelo supervisado capaz de  predecir si un encuestado utiliza herramientas de IA, empleando variables profesionales, educativas y tecnológicas. Para ello, se realiza un proceso analítico que incluye limpieza de  datos, análisis exploratorio, selección de técnicas, comparación de modelos y validación  cuantitativa utilizando métricas de desempeño como F1-score y curvas ROC.
+
+Metodológicamente, se aplican dos enfoques de clasificación ampliamente utilizados:  regresión logística y Random Forest. Ambos modelos se evalúan mediante validación cruzada  estratificada (k=5), considerando la naturaleza binaria de la variable objetivo y el leve  desbalance presente en el conjunto de datos. Asimismo, se analizan las ventajas, limitaciones  y estabilidad de cada modelo en función de su desempeño y su interpretabilidad.
+
+Finalmente, este informe se estructura de la siguiente manera: en el Capítulo 2 se presenta  el marco teórico relacionado con el modelamiento supervisado y las métricas utilizadas; en el  Capítulo 3 se describe el conjunto de datos y se desarrollan los análisis exploratorios; en el  Capítulo 4 se exponen los resultados del modelamiento y la comparación entre técnicas; y en  el Capítulo 5 se presentan las conclusiones, implicaciones prácticas y recomendaciones derivadas del estudio.
+
 
 \chapter{MARCO INTRODUCTORIO}
 
-\section{Antecedentes}
+\section{Planteamiento del Problema y Pregunta de Investigación}
+\subsection{Contextualización del Problema}
+El uso de herramientas basadas en Inteligencia Artificial (IA) se ha expandido de manera acelerada en el ámbito del desarrollo de software. Sin embargo, los niveles de adopción varían sustancialmente entre diferentes perfiles profesionales, regiones, industrias y niveles educativos. Esto plantea la necesidad de identificar los factores que explican esta variabilidad y permiten anticipar patrones de adopción tecnológica.
 
-Dummy text.
+El dataset público \textit{Stack Overflow Annual Developer Survey 2025} ofrece información estructurada sobre miles de desarrolladores a nivel global, permitiendo abordar este problema desde un enfoque cuantitativo y predictivo.
 
+\subsection{Problema de Investigación}
+A pesar de la disponibilidad de datos, no se conoce con claridad qué características del perfil de un desarrollador influyen más en la probabilidad de que utilice o no herramientas de IA. Tampoco se ha establecido un modelo sistemático que permita predecir este comportamiento y evaluar su desempeño mediante métricas apropiadas.
 
+\subsection{Pregunta de Investigación Principal}
 
-\section{Planteamiento del problema}
+La pregunta central que guía el presente estudio es la siguiente:
 
-Dummy text.
+\begin{quote}
+\textbf{¿Podemos predecir la adopción de IA en desarrolladores utilizando su perfil profesional y tecnológico en 2025?}
+\end{quote}
 
-\section{Formulación del problema de investigación}
+Esta formulación permite estructurar el análisis en torno a una variable objetivo claramente definida (\textit{AI\_Usage}) y a un conjunto de variables predictoras que combinan atributos categóricos y numéricos relevantes para el comportamiento tecnológico.
 
-\vspace{1em}
-\noindent
-\textit{¿Qué patrones lingüísticos diferencian las letras de canciones en español que han sido premiadas por la RIAA de aquellas que no han sido premiadas durante el período 1990--2022, y cómo pueden ser identificados mediante un modelo de clasificación supervisado?}
-\vspace{1em}
+\subsection{Tipo de Pregunta Analítica}
 
-\section{Delimitación}
+De acuerdo con la naturaleza de la variable objetivo (\textit{usa IA} = Sí/No), el estudio se enmarca en una \textbf{pregunta analítica de tipo predictivo}. Esto implica que el propósito no es explicar causalmente por qué se adopta la IA, sino construir un modelo capaz de estimar la probabilidad de adopción utilizando patrones aprendidos a partir de los datos disponibles.
 
-Dummy text.
+El problema se aborda mediante técnicas de \textbf{clasificación supervisada}, ya que el dataset incluye etiquetas reales que permiten entrenar modelos predictivos bajo un esquema de aprendizaje supervisado.
 
-\section{Problemas específicos}
+La pregunta planteada corresponde a un análisis de tipo:
 
-Dummy text.
+\begin{itemize}
+    \item \textbf{Predictivo}: se busca estimar un resultado futuro o no observado.
+    \item \textbf{Supervisado}: la variable objetivo (\texttt{AI\_Usage}) está disponible y es binaria.
+    \item \textbf{De clasificación}: el análisis requiere asignar una categoría (usa IA / no usa IA).
+\end{itemize}
 
-\section{Objetivos de la investigación}
-    \subsection{Objetivo general}
+\subsection{Justificación del Enfoque de Modelamiento}
+La elección de un enfoque supervisado de clasificación se justifica por las siguientes razones:
 
-    \noindent
-    Dummy text.
+\begin{enumerate}
+    \item El dataset contiene una \textbf{variable objetivo claramente definida} relacionada con el uso de herramientas de IA.
+    \item La naturaleza de la variable objetivo (binaria) permite la aplicación de modelos como regresión logística y Random Forest.
+    \item Existe interés práctico en \textbf{predecir la probabilidad de adopción} como apoyo a decisiones de formación, estrategias de talento y políticas internas en organizaciones tecnológicas.
+    \item Las características de los desarrolladores (rol, país, industria, experiencia, educación) pueden representar factores relevantes y medibles para la predicción.
+\end{enumerate}
 
-    \subsection{Objetivos específicos}
+\subsection{Objetivo}
 
-    Dummy text.
+Predecir la probabilidad de que un encuestado utilice herramientas de inteligencia artificial (\textit{AI Usage}: Sí/No) en función de sus características técnicas y demográficas.
 
 \section{Hipótesis}
 
-\noindent
-\textbf{Hipótesis principal:} \textit{Existen patrones lingüísticos diferenciables entre las letras de canciones en español que han sido premiadas por la RIAA y aquellas que no lo han sido, los cuales pueden ser identificados mediante un modelo de clasificación supervisado con un nivel de precisión estadísticamente significativo.}
+Un modelo predictivo permite identificar la tendencia de uso de IA en el desarrollo de software
 
-\subsection{Hipótesis específicas}
+\section{Criterio de Éxito}
 
-Dummy text.
+El proyecto se considera exitoso si el modelo predictivo cumple con el siguiente criterio:
 
-\begin{enumerate}
-  \item \textbf{Corpus balanceado.}  
-  El corpus recolectado presentará una proporción 1:1 de canciones premiadas y no premiadas por la RIAA, manteniendo una distribución representativa de géneros musicales y periodos temporales (1990–2022).
+\begin{quote}
+\textbf{F1-score mayor o igual a 0.80 en el conjunto de prueba, utilizando validación cruzada
+con $k = 5$ para asegurar la estabilidad del desempeño.}
+\end{quote}
 
-  \item \textbf{Preprocesamiento y vectorización.}  
-  El uso combinado de limpieza textual, normalización, eliminación de stopwords, lematización y extracción de n-gramas generará vectores TF-IDF con mayor capacidad discriminativa (medida en varianza explicada en un análisis de componentes principales) que una simple vectorización unigram.
+\newpage
+\thispagestyle{empty}
+\vspace*{0.35\textheight}
+\begin{center}
+	{\Huge\textbf{CAPÍTULO II}} \\[0.5cm]
+	{\Huge\textbf{MARCO TEORICO}}
+\end{center}
 
-  \item \textbf{Comparación de modelos.}  
-  El modelo XGBoost alcanzará un F1-score significativamente superior (p < 0.05) al de Naive Bayes en el conjunto de prueba, demostrando la ventaja del boosting en datos textuales con desequilibrio de clases.
+\newpage
+\chapter{MARCO TEÓRICO}
 
-  \item \textbf{Patrones lingüísticos.}  
-  Las variables afectivas (palabras con carga emocional) y los n-gramas de orden dos y tres serán los indicadores más influyentes para distinguir letras premiadas de no premiadas, según la importancia de características extraída de Random Forest y Regresión Logística.
+\section{Aprendizaje supervisado y problemas de clasificación}
 
-  \item \textbf{Visualización de resultados.}  
-  Las nubes de palabras y los mapas de calor mostrarán agrupaciones temáticas claramente diferenciadas entre canciones premiadas y no premiadas, facilitando la interpretación de los patrones lingüísticos identificados.
-\end{enumerate}
+El aprendizaje supervisado se refiere a la tarea de aprender una función a partir de ejemplos
+etiquetados, donde cada instancia de entrada $X$ está asociada a una salida $Y$ conocida.
+En los problemas de clasificación, la salida es una etiqueta discreta (por ejemplo, ``usa IA''
+versus ``no usa IA'') y el objetivo del modelo es aproximar la probabilidad
+$\mathbb{P}(Y \mid X)$ para asignar la clase más probable a nuevas observaciones
+\parencite{scikit-learn}. Este enfoque es especialmente apropiado cuando existe un conjunto de
+datos histórico que contiene tanto las características de los individuos como la clase que se
+desea predecir, como ocurre en encuestas o registros de uso de herramientas tecnológicas.
 
-\section{Justificación}
+En el contexto de este proyecto, el problema se formula como una \textbf{clasificación binaria},
+donde la variable objetivo indica si un desarrollador utiliza o no herramientas de inteligencia
+artificial en su trabajo cotidiano.
 
-\subsection{Justificación teórica}
+\section{Regresión Logística}
 
-Dummy text.
+La Regresión Logística es un modelo clásico para problemas de clasificación binaria que
+modela la probabilidad de pertenencia a una clase positiva a partir de una combinación lineal
+de predictores. Dado un vector de características $X = (x_1, x_2, \dots, x_p)$, la Regresión
+Logística define:
 
-\subsection{Justificación práctica y social}
+\[
+\mathbb{P}(Y = 1 \mid X) = \sigma(z) = \frac{1}{1 + e^{-z}}, \quad
+z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p,
+\]
 
-Dummy text.
+donde $\sigma(\cdot)$ es la función sigmoide y los parámetros $\beta_i$ se estiman
+normalmente mediante máxima verosimilitud \parencite{hosmer2013applied}. Una ventaja
+relevante de este modelo es su \textbf{interpretabilidad}: los coeficientes pueden traducirse
+en cambios en las probabilidades u \emph{odds} de la clase positiva en función de cada
+predictor, manteniendo constantes los demás.
 
-\subsection{Justificación metodológica}
+En aplicaciones prácticas, la Regresión Logística suele combinarse con técnicas de
+preprocesamiento como la estandarización de variables numéricas y la codificación de
+variables categóricas, por ejemplo mediante \textit{one-hot encoding}
+\parencite{scikit-learn}. Esto permite integrar variables heterogéneas (numéricas y
+categóricas) dentro de un mismo modelo.
 
-Dummy text.
+\section{Random Forest}
 
-\section{Alcances y limitaciones}
+Random Forest es un método de aprendizaje por ensamble basado en la construcción de
+múltiples árboles de decisión entrenados sobre subconjuntos aleatorios de los datos y de las
+variables. La predicción final se obtiene mediante una votación mayoritaria entre los árboles
+del bosque \parencite{breiman2001random}. Para un problema de clasificación, si
+$T_1(X), T_2(X), \dots, T_K(X)$ representan las predicciones de cada árbol sobre una
+instancia $X$, la predicción agregada se puede expresar como:
 
-\subsection{Alcances}
+\[
+\hat{Y} = \mathrm{mode}\{T_1(X), T_2(X), \dots, T_K(X)\}.
+\]
 
-Dummy text.
+Este enfoque reduce la varianza respecto a un único árbol de decisión y suele mejorar la
+capacidad de generalización, especialmente en problemas con relaciones no lineales y
+posibles interacciones entre variables. Sin embargo, la interpretabilidad global del modelo
+es menor que en la Regresión Logística, ya que resulta más difícil explicar el aporte de cada
+predictor a la decisión final \parencite{breiman2001random}.
 
-\subsection{Limitaciones}
+\section{Métricas de evaluación para modelos de clasificación}
 
-Dummy text.
+En problemas de clasificación con desbalance de clases, la exactitud (\emph{accuracy}) puede
+ser engañosa, ya que un modelo que favorezca la clase mayoritaria podría obtener valores
+elevados sin representar correctamente el comportamiento de la clase minoritaria. Por ello,
+es común utilizar métricas adicionales como:
 
-
-\section{Resultados esperados}
-
-Dummy text.
-
-\section{Matriz de Consistencia}
-
-Dummy text.
-
-\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
-
-\begin{table}[H]
-\centering
-\caption{Matriz de Consistencia}
-\begin{tabularx}{\textwidth}{|Y|Y|Y|Y|}
-\hline
-\textbf{Problema} & \textbf{Objetivo} & \textbf{Hipótesis} & \textbf{Variables} \\
-\hline
-\textbf{General:} ¿Qué patrones lingüísticos diferencian las letras de canciones en español premiadas por la RIAA de aquellas que no han sido premiadas durante el período 1990--2022, y cómo pueden ser identificados mediante un modelo de clasificación supervisado?
-
-\vspace{0.3em}
-\textbf{Específicos:}
-\begin{enumerate}
-  \item ¿Cómo construir un corpus balanceado?
-  \item ¿Qué técnicas PLN son adecuadas?
-  \item ¿Qué modelos clasifican mejor?
-  \item ¿Qué características son más relevantes?
-  \item ¿Cómo representar visualmente los resultados?
-\end{enumerate}
-&
-
-\textbf{General:} Desarrollar un modelo de clasificación supervisado que permita identificar y analizar patrones lingüísticos característicos de las letras de canciones en español premiadas y no premiadas por la RIAA.
-
-\vspace{0.3em}
-\textbf{Específicos:}
-\begin{enumerate}
-  \item Recolectar un corpus balanceado
-  \item Preprocesar con técnicas de PLN
-  \item Entrenar y comparar modelos
-  \item Identificar características lingüísticas
-  \item Visualizar patrones relevantes
-\end{enumerate}
-&
-
-\textbf{General:} Existen patrones lingüísticos diferenciables entre letras premiadas y no premiadas que pueden ser detectados por un modelo con precisión significativa.
-
-\vspace{0.3em}
-\textbf{Específicas:}
 \begin{itemize}
-  \item El contenido lingüístico varía entre clases
-  \item Algunos modelos son más precisos
-  \item Las visualizaciones ayudan a interpretar resultados
+  \item \textbf{Precisión (Precision)}: proporción de verdaderos positivos sobre todas las
+        predicciones positivas.
+  \item \textbf{Exhaustividad (Recall)}: proporción de verdaderos positivos sobre todos los
+        casos positivos reales.
+  \item \textbf{F1-score}: media armónica entre precisión y recall,
+        \[
+          F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}
+                         {\text{Precision} + \text{Recall}},
+        \]
+        que resume en una sola cifra el equilibrio entre ambas métricas.
+  \item \textbf{Área bajo la curva ROC (ROC AUC)}: mide la capacidad del modelo para
+        discriminar entre clases a lo largo de todos los umbrales posibles
+        \parencite{powers2020evaluation}.
 \end{itemize}
-&
 
-\textbf{Independiente:} Contenido lingüístico de las letras
+El uso de F1-score es especialmente recomendable cuando el costo de los falsos negativos y
+falsos positivos no es simétrico y se desea capturar un equilibrio entre precisión y recall en
+la clase de interés \parencite{powers2020evaluation}.
 
-\vspace{0.3em}
-\textbf{Dependiente:} Éxito musical (premiación)
+\section{Validación cruzada y optimización de hiperparámetros}
 
-\vspace{0.3em}
-\textbf{Auxiliares:} Desempeño del modelo, visualización e interpretabilidad
-\\
-\hline
-\end{tabularx}
-\label{tab:matriz_consistencia}
-\end{table}
+Para obtener estimaciones robustas del desempeño de un modelo y evitar depender de una
+única partición entrenamiento/prueba, se utiliza la \textbf{validación cruzada}
+(\emph{cross-validation}). En la validación cruzada $k$-fold estratificada, el conjunto de datos
+se divide en $k$ subconjuntos aproximadamente del mismo tamaño, manteniendo la
+proporción de clases en cada fold. El modelo se entrena $k$ veces, dejando en cada iteración
+un fold distinto como conjunto de validación \parencite{scikit-learn}. La métrica final se
+calcula como el promedio de las métricas obtenidas en cada fold.
+
+La \textbf{optimización de hiperparámetros} consiste en buscar la combinación de parámetros
+del modelo (por ejemplo, el término de regularización $C$ en Regresión Logística o el número
+de árboles en Random Forest) que maximiza una métrica de desempeño definida. En la
+literatura se describen estrategias como la \textit{búsqueda en malla} (\emph{grid search}) y la
+\textit{búsqueda aleatoria} (\emph{random search}). Mientras que la búsqueda en malla evalúa de
+forma exhaustiva todas las combinaciones de un conjunto finito de valores, la búsqueda
+aleatoria muestrea aleatoriamente combinaciones de hiperparámetros a partir de
+distribuciones predefinidas, lo que puede resultar más eficiente en espacios de gran
+dimensión \parencite{bergstra2012random}.
+
+En este proyecto, tanto la validación cruzada como la optimización de hiperparámetros se
+implementan utilizando las herramientas provistas por la biblioteca \texttt{scikit-learn}
+\parencite{scikit-learn,scikit-docs}, lo que permite integrar de manera coherente el
+preprocesamiento, el modelado y la evaluación de desempeño.
+
+\section{Búsqueda de hiperparámetros: GridSearchCV y RandomizedSearchCV}
+
+La optimización de hiperparámetros es una etapa fundamental en el aprendizaje automático,
+ya que estos parámetros controlan el comportamiento interno de los modelos y pueden afectar
+de manera significativa su desempeño. A diferencia de los parámetros aprendidos durante el
+entrenamiento (por ejemplo, los coeficientes en Regresión Logística), los hiperparámetros deben
+definirse antes del proceso de ajuste del modelo, por lo que requieren métodos específicos de
+búsqueda y validación \parencite{bergstra2012random}.
+
+En este proyecto se emplearon dos técnicas ampliamente utilizadas en la literatura y
+implementadas en \texttt{scikit-learn}: \textbf{GridSearchCV} y \textbf{RandomizedSearchCV}.
+
+\subsection{GridSearchCV}
+
+La búsqueda en malla (\emph{grid search}) consiste en evaluar exhaustivamente todas las
+combinaciones posibles de hiperparámetros dentro de un espacio de búsqueda predefinido.
+Cada combinación se entrena y evalúa mediante validación cruzada, y se selecciona aquella que
+maximiza la métrica elegida (en este caso, el F1-score). Formalmente, si definimos un conjunto
+de hiperparámetros posibles $H = H_1 \times H_2 \times \dots \times H_k$, GridSearchCV evalúa:
+
+\[
+\hat{h} = \underset{h \in H}{\arg\max} \; \text{CVScore}(h)
+\]
+
+donde $\text{CVScore}(h)$ representa el rendimiento promedio del modelo entrenado con la
+combinación de hiperparámetros $h$ en los $k$ folds de validación cruzada
+\parencite{scikit-learn}. Este método garantiza encontrar el mejor valor dentro de la malla
+definida, pero su costo computacional crece exponencialmente con el número de parámetros
+y opciones por parámetro.
+
+\subsection{RandomizedSearchCV}
+
+La búsqueda aleatoria (\emph{random search}) propone una alternativa más eficiente en
+espacios de búsqueda amplios. En lugar de evaluar todas las combinaciones posibles,
+RandomizedSearchCV realiza muestreos aleatorios de los hiperparámetros según
+distribuciones predefinidas. Esto permite explorar regiones más amplias del espacio de manera
+más eficiente y, en muchos casos, encontrar combinaciones de hiperparámetros tan buenas o
+mejores que las obtenidas por la búsqueda exhaustiva \parencite{bergstra2012random}.
+
+El método selecciona un número fijo de iteraciones $n$ y evalúa:
+
+\[
+\hat{h} = \underset{h \sim P(H)}{\arg\max} \; \text{CVScore}(h)
+\]
+
+donde $P(H)$ es una distribución de probabilidad sobre el espacio de hiperparámetros, como
+distribuciones uniformes, log-uniformes o discretas. Esto lo hace especialmente útil para
+parámetros como el valor de regularización $C$ en Regresión Logística, donde valores muy
+grandes o muy pequeños pueden influir de manera no lineal en el desempeño del modelo.
+
+\subsection{Comparación conceptual}
+
+\begin{itemize}
+  \item \textbf{GridSearchCV}: exhaustivo, garantiza encontrar el mejor valor dentro del grid,
+        pero puede ser costoso computacionalmente.
+  \item \textbf{RandomizedSearchCV}: eficiente en espacios de alta dimensión, permite explorar
+        más variedad de hiperparámetros en menos tiempo.
+  \item Ambos métodos se basan en \textbf{validación cruzada} para estimar el desempeño real
+        del modelo y evitar sobreajuste.
+\end{itemize}
+
+En este proyecto, ambos métodos convergieron en valores muy similares en Regresión Logística, lo que sugiere que el espacio de búsqueda fue bien definido y que el modelo base ya presentaba un comportamiento cercano a su óptimo con las variables disponibles.

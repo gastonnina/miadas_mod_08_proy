@@ -1,29 +1,26 @@
 \newpage
 \begin{center}
-  \textbf{Resumen}
+  \textbf{Resumen Ejecutivo}
 \end{center}
 
-\noindent El presente informe desarrolla un modelo supervisado para predecir la adopción
-de herramientas de Inteligencia Artificial por desarrolladores profesionales,
-utilizando el dataset público \textit{Stack Overflow Annual Developer Survey 2025}.
-El estudio aplica técnicas de análisis exploratorio, modelamiento y validación
-utilizando regresión logística y Random Forest, evaluados mediante F1-score
-con validación cruzada k-fold.
+\noindent
 
-Los resultados muestran que la regresión logística sin balance alcanza el mejor
-equilibrio entre rendimiento, estabilidad e interpretabilidad (F1=0.8817).
-Se presentan además limitaciones, implicaciones prácticas y recomendaciones
-para organizaciones tecnológicas en procesos de adopción de IA.
+El presente proyecto desarrolla un modelo supervisado para predecir la adopción de herramientas de inteligencia artificial en la comunidad de desarrolladores, utilizando datos de la encuesta global \textit{Stack Overflow Developer Survey 2025}. El proceso siguió una metodología completa que incluyó limpieza de datos, análisis exploratorio, selección de técnica analítica, evaluación de modelos competidores y optimización de hiperparámetros.
 
-\bigskip
-\noindent\textit{Palabras clave:} clasificación supervisada, letras de canciones, TF–IDF, éxito musical, PLN, aprendizaje automático.
+Los análisis iniciales mostraron que factores profesionales, tecnológicos y geográficos influyen de manera combinada en el uso de IA, aunque con correlaciones de baja magnitud. Con base en ello, se implementaron y compararon dos modelos principales: Regresión Logística y Random Forest, en versiones balanceadas y no balanceadas. El criterio de selección fue el \textit{F1-score}, dada la ligera desproporción entre clases.
 
-\newpage
-\begin{center}
-  \textbf{Abstract}
-\end{center}
+El modelo con mejor desempeño y mayor estabilidad fue la \textbf{Regresión Logística sin balance}, que obtuvo un F1 promedio de $0.8817$ con baja variabilidad. Tras aplicar técnicas de optimización (GridSearchCV y RandomizedSearchCV), se logró un F1 cercano a $0.883$, además de un aumento sustancial en el \textit{recall} de la clase positiva, reduciendo los falsos negativos de $105$ a $17$. Si bien la mejora no alcanzó el 5\% sugerido, la robustez y explicabilidad del modelo lo convierten en la mejor alternativa para cumplir los objetivos del estudio.
 
-\noindent This monograph presents the development of a supervised classification model designed to identify linguistic patterns in Spanish song lyrics associated with musical success, as defined by awards granted by the \textit{Recording Industry Association of America} (RIAA). Natural language processing techniques such as text cleaning, lemmatization, and TF–IDF vectorization were applied to transform lyrics into structured numerical representations. Five machine learning algorithms were evaluated: \textit{Naive Bayes}, \textit{Logistic Regression}, \textit{Support Vector Machines}, \textit{Random Forest}, and \textit{XGBoost}. Model performance was assessed using accuracy, precision, recall, and F1–score. The results provide empirical evidence that lyrical content can serve as a predictor of award recognition, contributing to automated analysis of artistic works and the development of intelligent cultural recommendation systems.
+Los resultados permiten identificar patrones de adopción de IA en desarrolladores globales y proveer información útil para estrategias de formación, talento y adopción tecnológica en organizaciones.
 
-\bigskip
-\noindent\textit{Keywords:} supervised classification, song lyrics, TF–IDF, musical success, NLP, machine learning.
+\section*{Enlaces del Proyecto}
+
+\textbf{Sitio Web del Sprint 1 (SITIO WEB):}\\
+\url{https://gastonnina.github.io/miadas_mod_08_proy/}
+
+\vspace{0.5cm}
+
+\textbf{Repositorio del Proyecto: (NOTEBOOK y CODIGO SITIO WEB)}\\
+\url{https://github.com/gastonnina/miadas_mod_08_proy}
+
+\vspace{1cm}
